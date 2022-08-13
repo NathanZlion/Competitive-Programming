@@ -1,6 +1,6 @@
 
 class Solution(object):
-    def fizzBuzz(self, n):
+    def FizzBuzz(self, n):
         msgout = []
         for i in range(1, n+1):
             msg = ""
