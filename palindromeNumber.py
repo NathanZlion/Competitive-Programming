@@ -1,13 +1,13 @@
-  def isPalindrome(self, x):
-      if x < 0:
+  def isPalindrome(num):
+      if num < 0:
           return False
-      num = str(x)
+      strNnum = str(num)
       # casted it to string :( 
 
-      length = len(num)
+      length = len(strNnum)
       if length == 1:
           return True
       for i in range(length//2):
-          if num[i] != num [length - i -1]:
+          if strNum[i] != strNum [length - i -1]:
               return False
       return True
