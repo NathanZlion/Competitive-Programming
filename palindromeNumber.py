@@ -1,7 +1,7 @@
   def isPalindrome(num):
       if num < 0:
           return False
-      strNnum = str(num)
+      strNum = str(num)
       # casted it to string :( 
 
       length = len(strNnum)
