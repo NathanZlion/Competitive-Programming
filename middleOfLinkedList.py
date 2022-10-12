@@ -6,8 +6,7 @@
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
         flag = 0
-        middleNode = head
-        currNode = head
+        middleNode = currNode = head
 
         while not(currNode is None):
             flag += 1
