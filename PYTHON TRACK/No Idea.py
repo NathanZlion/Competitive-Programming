@@ -6,6 +6,7 @@ a = set(map(int, input().split()))
 b = set(map(int, input().split()))
 
 happiness = 0
+
 for i in arr:
     if i in a:
         happiness += 1
