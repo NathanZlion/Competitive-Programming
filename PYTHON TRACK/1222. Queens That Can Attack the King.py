@@ -108,4 +108,5 @@ class Solution(object):
         checkBottomLeft()
         checkBottomRight()
         
+        
         return validQueens
