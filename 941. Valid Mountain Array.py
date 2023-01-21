@@ -1,5 +1,9 @@
 class Solution(object):
     def validMountainArray(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: bool
+        """
 
         if len(arr) < 3:
             return False
@@ -34,7 +38,7 @@ class Solution(object):
                 elif arr[index] < arr[index - 1]:
                     while index < n-1:
                         if arr[index] <= arr [index +1]:
-                            return Fal>e
+                            return False
                         index += 1
                     return True
                 else:
