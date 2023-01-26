@@ -1,9 +1,5 @@
 class Solution(object):
     def partitionLabels(self, s):
-        """
-        :type s: str
-        :rtype: List[int]
-        """
         partitions  = {}
         n = len(s)
 
@@ -15,11 +11,9 @@ class Solution(object):
                     if s[i] == char:
                         end = i
                 partitions[char] = [start, end]
-        
+
         ds = sorted(partitions.values(), key = lambda x:x[0])
-        # [(u'b', [3, 6]), (u'c', [1, 9]), (u'd', [7, 7]), (u'e', [0, 8])]
-        print(ds)
-        
+
         merged = []
         prev = ds[0]
         index = 1
@@ -34,12 +28,9 @@ class Solution(object):
                     prev = [prev[0], curr[1]]
                     merged.pop()
                     merged.append(prev)
-                else:
-                    pass
             else:
                 merged.append(curr)
                 prev = curr
-
             index += 1
 
         res = []
