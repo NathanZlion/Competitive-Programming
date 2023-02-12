@@ -1,9 +1,5 @@
 class Solution(object):
     def sortArrayByParity(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
         evens = []
         odds = []
         for num in nums:
