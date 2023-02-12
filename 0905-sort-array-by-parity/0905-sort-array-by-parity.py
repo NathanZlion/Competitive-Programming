@@ -1,13 +1,15 @@
 class Solution(object):
     def sortArrayByParity(self, nums):
-        evens = []
-        odds = []
+        newArr = [num for num in nums]
+        p_even = 0
+        p_odd = len(nums)-1
         for num in nums:
             if num % 2:
-                odds.append(num)
+                newArr[p_odd] = num
+                p_odd -= 1
             else:
-                evens.append(num)
+                newArr[p_even] = num
+                p_even += 1
         
-        evens.extend(odds)
-        return evens
+        return newArr
         
