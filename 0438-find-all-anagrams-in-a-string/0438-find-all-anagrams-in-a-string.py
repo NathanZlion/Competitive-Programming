@@ -3,25 +3,25 @@ class Solution:
         if len(p) > len(s):
             return []
         
+        countp = [0 for _ in range(26)]
+        for char in p:
+            countp[ord(char)-97] += 1
+        
+        k = len(p)
+        counts = [0 for _ in range(26)]
+        
+        n = len(p)
+        m = len(s)
         
         res = []
-        newStr = sorted(s[:len(p)])
-        p = sorted(p)
-        
-        if newStr == p:
-            res.append(0)
-        
-        for end in range(len(p), len(s)):
-            newStr.remove(s[end-len(p)])
-            newStr.append(s[end])
-            newStr.sort()
-            if newStr == p:
-                res.append(end-len(p)+1)
-        
+        left = 0
+        for right in range(m):
+            counts[ord(s[right])-97] += 1
+            if right-left+1 == n:
+                if counts == countp:
+                    res.append(left)
+                counts[ord(s[left])-97] -= 1
+                left += 1
+            
+
         return res
-        
-        
-        
-        
-        
-        
