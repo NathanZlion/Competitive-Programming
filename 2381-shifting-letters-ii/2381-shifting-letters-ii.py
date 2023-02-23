@@ -4,11 +4,12 @@ class Solution:
         alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
         def wrap(index):
             index -= 97
-            while index < 0:
-                index += 26
+            # while index < 0:
+            #     index += 26
             # if index < 0:
-                # index += (26 * ((index//26)+2))
-            if index > 25:
+            #     offset = 26 * ((index//26)+2)
+            #     index += offset
+            if index > 25 or index <0:
                 index = index % 26
 
             return alphabet[index]
