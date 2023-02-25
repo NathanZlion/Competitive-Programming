@@ -5,12 +5,9 @@ class MyCircularDeque:
         self.size = k
 
     def insertFront(self, value: int) -> bool:
-        print(self.deq)
         if self.isFull():
             return False
         self.deq.appendleft(value)
-        print(self.deq)
-
         return True
 
     def insertLast(self, value: int) -> bool:
@@ -32,32 +29,16 @@ class MyCircularDeque:
         return True
 
     def getFront(self) -> int:
-        if self.isEmpty():
-            return -1
-        return self.deq[0]
+        return self.deq[0] if not self.isEmpty() else -1
 
     def getRear(self) -> int:
-        if self.isEmpty():
-            return -1
-        return self.deq[-1]
+        return self.deq[-1] if not self.isEmpty() else -1
 
+    def length(self) -> int:
+        return len(self.deq)
 
     def isEmpty(self) -> bool:
-        return len(self.deq) == 0
-        
+        return self.length() == 0
 
     def isFull(self) -> bool:
-        return len(self.deq) == self.size
-        
-
-
-# Your MyCircularDeque object will be instantiated and called as such:
-# obj = MyCircularDeque(k)
-# param_1 = obj.insertFront(value)
-# param_2 = obj.insertLast(value)
-# param_3 = obj.deleteFront()
-# param_4 = obj.deleteLast()
-# param_5 = obj.getFront()
-# param_6 = obj.getRear()
-# param_7 = obj.isEmpty()
-# param_8 = obj.isFull()
+        return self.length() == self.size
