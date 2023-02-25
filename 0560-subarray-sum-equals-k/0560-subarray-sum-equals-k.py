@@ -5,7 +5,7 @@ class Solution:
         count = 0
         
         prefixMap = defaultdict(int)
-        prefixMap[0]=1
+        prefixMap[0] = 1
         nums.append(0)
         
         for index in range(n):
@@ -14,7 +14,3 @@ class Solution:
             prefixMap[nums[index]] += 1
 
         return count
-            
-            
-        
-        
