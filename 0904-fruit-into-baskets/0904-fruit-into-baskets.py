@@ -8,12 +8,16 @@ class Solution:
         freq = defaultdict(int)
         for right in range(n):
             
+            
             freq[fruits[right]] += 1
 
             while len(freq) > 2:
-                freq[fruits[left]] -= 1
-                if freq[fruits[left]] == 0:
+
+                if freq[fruits[left]] == 1:
                     del freq[fruits[left]]
+                else:
+                    freq[fruits[left]] -= 1
+
                 left += 1
 
 
