@@ -1,7 +1,3 @@
 class Solution:
     def squareIsWhite(self, coordinates: str) -> bool:
-        r = coordinates[0]
-        c = int(coordinates[1])
-        r = ord(r)-96
-        
-        return ((r+c)%2)!=0
+        return ((ord(coordinates[0])-96 + int(coordinates[1]))%2) != 0
