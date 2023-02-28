@@ -3,8 +3,9 @@ class Solution:
         if n==1:
             return True
 
-        if n%3 or n<1:
+        if n%3 or n==0:
             return False
 
-        return self.isPowerOfThree(n/3)
+
+        return self.isPowerOfThree(n//3)
 
