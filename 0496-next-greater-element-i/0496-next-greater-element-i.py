@@ -6,7 +6,6 @@ class Solution:
             return -1
 
         dc = defaultdict(no_exist)
-        n = len(nums1)
         m = len(nums2)
 
         for ptr1 in range(m):
@@ -16,12 +15,10 @@ class Solution:
                     dc[nums2[ptr1]] = nums2[ptr2]
                     break
                 ptr2 += 1
-            
+        
         res = []
         for num in nums1:
             res.append(dc[num])
         
         return res
-        
-        
 
