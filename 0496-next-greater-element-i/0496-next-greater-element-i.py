@@ -2,10 +2,7 @@ class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         'optimized monotonic stack approach'
 
-        def no_exist():
-            return -1
-
-        dc = defaultdict(no_exist)
+        dc = defaultdict(lambda: -1)
 
         stack = []  # decreasing stack
         n = len(nums2)
