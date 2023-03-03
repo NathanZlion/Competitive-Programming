@@ -7,7 +7,7 @@ class Solution:
         for weight in weights:
             currWeight += weight
             if currWeight > shipCapacity:
-                currWeight  = weight
+                currWeight = weight
                 daysTaken += 1
 
         if currWeight > 0:
@@ -19,13 +19,12 @@ class Solution:
     def shipWithinDays(self, weights: List[int], days: int) -> int:
 
         low = max(weights)-1
-        high = sum(weights)+1 # take all at once
+        high = sum(weights)+1
 
         while high > low+1:
             mid = low + (high-low)//2
-            isAllowed = self.daysNeeded(weights, mid) <= days
 
-            if isAllowed:
+            if self.daysNeeded(weights, mid) <= days:
                 high = mid
             else:
                 low = mid
