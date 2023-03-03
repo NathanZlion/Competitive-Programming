@@ -3,11 +3,8 @@ class Solution:
         passangers = [0 for _ in range(1001)]
         
         for trip in trips:
-            numPassangers = trip[0]
-            from_ = trip[1]
-            to_ = trip[2]
-            passangers[from_] += numPassangers
-            passangers[to_] -= numPassangers
+            passangers[trip[1]] += trip[0]
+            passangers[trip[2]] -= trip[0]
         
         for index in range(1000):
             passangers[index] += passangers[index-1]
