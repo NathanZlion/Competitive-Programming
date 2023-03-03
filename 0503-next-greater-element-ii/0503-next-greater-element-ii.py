@@ -12,10 +12,9 @@ class Solution:
                     next_greater_at_index[stack.pop()[0]] = nums[index%n]
 
             stack.append([index, nums[index%n]])
-        
-        def minus1(): return -1
 
-        next_greater_at_index = defaultdict(minus1,next_greater_at_index )
+
+        next_greater_at_index = defaultdict(lambda:-1 ,next_greater_at_index )
         for index in range(n):
             nums[index] = next_greater_at_index[index]
         
