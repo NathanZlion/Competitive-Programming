@@ -1,10 +1,5 @@
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
-        '''
-        left => value <= target
-        right => value > target
-        '''
-        
         low = -1
         high = len(nums)
 
