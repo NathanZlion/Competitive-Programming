@@ -3,6 +3,7 @@ class Solution:
         passangers = [0 for _ in range(1001)]
         
         for trip in trips:
+            if trip[0] > capacity: return False
             passangers[trip[1]] += trip[0]
             passangers[trip[2]] -= trip[0]
         
