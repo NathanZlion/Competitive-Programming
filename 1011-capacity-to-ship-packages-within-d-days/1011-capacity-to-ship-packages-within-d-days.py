@@ -1,6 +1,6 @@
 class Solution:
     
-    def daysNeeded(self, weights, shipCapacity, maxDays):
+    def daysNeeded(self, weights, shipCapacity):
         daysTaken = 0
         currWeight = 0
         
@@ -13,7 +13,7 @@ class Solution:
         if currWeight > 0:
             daysTaken += 1
 
-        return daysTaken <= maxDays
+        return daysTaken
 
 
     def shipWithinDays(self, weights: List[int], days: int) -> int:
@@ -23,7 +23,7 @@ class Solution:
 
         while high > low+1:
             mid = low + (high-low)//2
-            isAllowed = self.daysNeeded(weights, mid, days)
+            isAllowed = self.daysNeeded(weights, mid) <= days
 
             if isAllowed:
                 high = mid
