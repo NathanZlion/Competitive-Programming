@@ -18,9 +18,6 @@ class Solution:
         while s[num_start_index].isdigit() and num_start_index > -1:
             num_start_index -= 1
 
-        num_start_index += 1
-        multiplier = int(s[num_start_index: start])
+        multiplier = int(s[num_start_index+1: start])
 
-        ans = s[:num_start_index] + (multiplier* s[start+1:end]) + s[end+1:]
-
-        return self.decodeString(ans)
+        return self.decodeString( s[:num_start_index + 1] + (multiplier* s[start+1:end]) + s[end+1:])
