@@ -10,8 +10,8 @@ class Solution:
             postfixsum[i] += postfixsum[i+1]
 
         h_index = 0
-        for mid in range(1,1000):
-            if postfixsum[mid] >= mid:
-                h_index = mid
+        for index in range(1,1000):
+            if postfixsum[index] >= index:
+                h_index = index
 
         return h_index
