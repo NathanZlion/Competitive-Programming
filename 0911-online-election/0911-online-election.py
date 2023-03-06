@@ -10,7 +10,7 @@ class TopVotedCandidate:
             
             if count[leader] <= count[person]:
                 leader = person
-            
+
             persons[index] = leader            
             
         self.persons = persons
