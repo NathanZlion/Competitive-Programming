@@ -1,12 +1,10 @@
 class Solution:
     
     def hIndex(self, citations: List[int]) -> int:
-        count = [0 for _ in range(1001)]
+        postfixsum = [0 for _ in range(1001)]
 
         for citation in citations:
-            count[citation] += 1
-
-        postfixsum = [i for i in count]
+            postfixsum[citation] += 1
 
         for i in range(999,-1,-1):
             postfixsum[i] += postfixsum[i+1]
