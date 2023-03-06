@@ -16,13 +16,9 @@ class TopVotedCandidate:
         self.persons = persons
         self.times = times
 
-        print(self.persons)
 
     def q(self, t: int) -> int:
-        # find the time t in self.times and it's index
-        # use binary search
-        # then find the corresponding winner at that index
-        
+
         low = -1
         high = len(self.times)
         
@@ -34,9 +30,3 @@ class TopVotedCandidate:
                 low = mid
         
         return self.persons[low]
-
-
-
-# Your TopVotedCandidate object will be instantiated and called as such:
-# obj = TopVotedCandidate(persons, times)
-# param_1 = obj.q(t)
