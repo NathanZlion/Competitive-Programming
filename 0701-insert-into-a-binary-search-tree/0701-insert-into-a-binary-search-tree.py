@@ -5,29 +5,21 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    
-    
-    def helper(self, cur, par, val):
-        if not cur:
-            if val > par.val:
-                par.right = TreeNode(val)
-            else:
-                par.left = TreeNode(val)
-
-        elif val > cur.val:
-            self.helper(cur.right, cur, val)
-
-        else:
-            self.helper(cur.left, cur, val)
-
-
     def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
         
         if not root:
-            root =  TreeNode(val)
-            return root
-        
-        self.helper(root, root, val)
+            return TreeNode(val)
+
+        if root.val > val:
+            if not root.left:
+                root.left = self.insertIntoBST(root.left, val)
+            else:
+                self.insertIntoBST(root.left, val)
+
+        elif root.val < val:
+            if not root.right:
+                root.right = self.insertIntoBST(root.right, val)
+            else:
+                self.insertIntoBST(root.right, val)
 
         return root
-
