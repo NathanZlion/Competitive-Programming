@@ -7,12 +7,12 @@ class Solution:
         while high > low+1:
             mid = low + (high-low)//2
 
-            if self.intervals[mid][0] < interval[1]:
+            if self.sortedIntervals[mid][0] < interval[1]:
                 low = mid
             else:
                 high = mid
 
-        return -1 if high == self.length else self.intervals[high][2]
+        return -1 if high == self.length else self.sortedIntervals[high][2]
 
 
     def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
@@ -22,11 +22,11 @@ class Solution:
         for index, interval in enumerate(intervals):
             interval.append(index)
 
-        self.intervals = [i for i in sorted(intervals, key= lambda x:x[0])]
+        self.sortedIntervals = [i for i in sorted(intervals, key= lambda x:x[0])]
+
         res = [-1 for _ in range(self.length)]
 
-        for index, interval in enumerate(self.intervals):
+        for index, interval in enumerate(self.sortedIntervals):
             res[interval[2]] = self.findCorrespondingRight(interval, index)
 
         return res
-
