@@ -1,7 +1,7 @@
 class Solution:
 
     def findCorrespondingRight(self, interval: List[int], index: int) -> int:
-        low = -1
+        low = index-1
         high = self.length
 
         while high > low+1:
@@ -12,7 +12,7 @@ class Solution:
             else:
                 high = mid
 
-        return -1 if high==self.length else self.intervals[high][2]
+        return -1 if high == self.length else self.intervals[high][2]
 
 
     def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
