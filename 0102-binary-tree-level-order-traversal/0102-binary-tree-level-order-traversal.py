@@ -24,5 +24,4 @@ class Solution:
         self.traversedList = []
         self.traverse(root,0)
 
-
         return self.traversedList
