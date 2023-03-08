@@ -7,7 +7,7 @@
 
 class Solution:
     
-    def hasNode(self, root: Optional[TreeNode], node: [TreeNode]) -> bool:
+    def hasNode(self, root: Optional[TreeNode], node: Optional[TreeNode]) -> bool:
         if not (root and node):
             return False
 
@@ -24,7 +24,6 @@ class Solution:
 
         if self.hasNode(root.left, p) and self.hasNode(root.left, q):
             return self.lowestCommonAncestor(root.left, p, q)
-        
+
+
         return root
-        
-        
