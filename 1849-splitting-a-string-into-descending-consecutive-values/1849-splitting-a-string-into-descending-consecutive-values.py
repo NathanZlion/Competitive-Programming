@@ -13,13 +13,15 @@ class Solution:
             leftInt = integ(left)
             rightInt = integ(right)
 
-            if integ(right)+1  == leftInt:
+            if integ(right)+1 == leftInt:
                 self.possible  = True
-                return
+                return True
 
             for i in range(1,len(right)):
                 if leftInt == integ(right[:i]) + 1:
-                    backTrack(right[:i], right[i:])
+                    if backTrack(right[:i], right[i:]):
+                        return
+
 
         for i in range(1,len(s)):
             backTrack(arr[:i], arr[i:])
