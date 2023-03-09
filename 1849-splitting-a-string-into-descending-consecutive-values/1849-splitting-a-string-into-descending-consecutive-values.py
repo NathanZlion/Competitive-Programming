@@ -20,8 +20,7 @@ class Solution:
             for i in range(1,len(right)):
                 if leftInt == integ(right[:i]) + 1:
                     if backTrack(right[:i], right[i:]):
-                        return
-
+                        return True
 
         for i in range(1,len(s)):
             backTrack(arr[:i], arr[i:])
