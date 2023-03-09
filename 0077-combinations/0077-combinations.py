@@ -8,6 +8,9 @@ class Solution:
             if index > n+1:
                 return
 
+            if n - index + 1 + len(path) < k :
+                return
+            
             if len(path) == k:
                 combinations.append(path[:])
                 return
