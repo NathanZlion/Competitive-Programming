@@ -6,24 +6,13 @@
 #         self.right = None
 
 class Solution:
-    
-    def hasNode(self, root: Optional[TreeNode], node: Optional[TreeNode]) -> bool:
-        if not (root and node):
-            return False
-
-        if root is node:
-            return True
-
-        return self.hasNode(root.right, node) or self.hasNode(root.left, node)    
-
 
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        
-        if self.hasNode(root.right, p) and self.hasNode(root.right, q):
+
+        if p.val > root.val and q.val > root.val:
             return self.lowestCommonAncestor(root.right, p, q)
 
-        if self.hasNode(root.left, p) and self.hasNode(root.left, q):
+        if  p.val < root.val and q.val < root.val:
             return self.lowestCommonAncestor(root.left, p, q)
-
 
         return root
