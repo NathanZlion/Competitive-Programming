@@ -9,7 +9,6 @@ class Solution:
             return int("".join(arr))
 
         def backTrack(left, right):
-            print(left, right)
 
             leftInt = integ(left)
             rightInt = integ(right)
@@ -21,7 +20,6 @@ class Solution:
             for i in range(1,len(right)):
                 if leftInt == integ(right[:i]) + 1:
                     backTrack(right[:i], right[i:])
-
 
         for i in range(1,len(s)):
             backTrack(arr[:i], arr[i:])
