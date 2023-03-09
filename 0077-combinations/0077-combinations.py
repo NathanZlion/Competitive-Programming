@@ -5,7 +5,7 @@ class Solution:
 
         def backTrack(index, path):
             
-            if index > n:
+            if index > n+1:
                 return
             
             if len(path) == k:
@@ -13,12 +13,11 @@ class Solution:
                 return
             
             list1 = path[:]
-            list1.append(index+1)
+            list1.append(index)
             backTrack(index+1, list1)
             
             backTrack(index+1, path)        
 
-        backTrack(0, [])
+        backTrack(1, [])
 
         return combinations
-        
