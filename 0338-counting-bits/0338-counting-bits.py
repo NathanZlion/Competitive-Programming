@@ -11,10 +11,10 @@ class Solution:
 
 
     def countBits(self, n: int) -> List[int]:
-        ans = [0 for _ in range(n+1)]
+        ans = []
         
         for i in range(n+1):
-            ans[i] = self.numberOfOnes(i)
+            ans.append(self.numberOfOnes(i))
 
         return ans
         
