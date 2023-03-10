@@ -19,13 +19,14 @@ class Solution:
                 return True
 
             if rightInt < leftInt:
-                return
+                return False
 
             for i in range(1,len(right)):
                 if leftInt == integ(right[:i]) + 1:
                     if backTrack(right[:i], right[i:]):
                         return True
 
+            return False
 
         for i in range(1,len(s)):
             backTrack(arr[:i], arr[i:])
