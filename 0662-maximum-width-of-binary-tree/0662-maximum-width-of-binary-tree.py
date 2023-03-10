@@ -16,12 +16,11 @@ class Solution:
             if depth >= len(levels):
                 levels.append([index])
             else:
-                print(levels[depth])
                 if len(levels[depth]) > 1:
                     levels[depth].pop()
 
                 levels[depth].append(index)
-                
+
             backTrack(node.left, index*2, depth+1)
             backTrack(node.right, index*2+1, depth+1)
         
