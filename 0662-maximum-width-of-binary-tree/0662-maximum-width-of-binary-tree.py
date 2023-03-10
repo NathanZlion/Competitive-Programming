@@ -17,7 +17,7 @@ class Solution:
                 levels.append([index])
             else:
                 print(levels[depth])
-                while len(levels[depth]) > 1:
+                if len(levels[depth]) > 1:
                     levels[depth].pop()
 
                 levels[depth].append(index)
