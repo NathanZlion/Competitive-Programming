@@ -15,7 +15,7 @@ class Solution:
             
             if depth >= len(levels):
                 levels.append([index])
-
+                
             else:
                 if len(levels[depth]) > 1:
                     levels[depth].pop()
@@ -24,10 +24,10 @@ class Solution:
 
             backTrack(node.left, index*2, depth+1)
             backTrack(node.right, index*2+1, depth+1)
-
+        
         
         backTrack(root, 0, 0)
-
+        
         maxWidth = -1
 
         for arr in levels:
