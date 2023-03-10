@@ -1,7 +1,7 @@
 class Solution:
     
-    def backTrace(self, arr, index):
-        
+    def backTrace(self, arr:List[int], index:int) -> None:
+
         if index == len(self.nums):
             self.allSubsets.append(arr)
             return
