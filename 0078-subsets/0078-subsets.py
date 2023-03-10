@@ -10,14 +10,12 @@ class Solution:
         newarr = [i for i in arr]
         newarr.append(self.nums[index])
         self.backTrace(newarr, index+1)
-        
-    
-    
+
+
     def subsets(self, nums: List[int]) -> List[List[int]]:
         self.nums = nums
         self.allSubsets = []
         self.backTrace([], 0)
-        
         
         return self.allSubsets
         
