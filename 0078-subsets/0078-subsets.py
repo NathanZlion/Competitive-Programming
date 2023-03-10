@@ -5,7 +5,7 @@ class Solution:
         if index == len(self.nums):
             self.allSubsets.append(arr)
             return
-        
+
         self.backTrace(arr, index+1)
         newarr = [i for i in arr]
         newarr.append(self.nums[index])
@@ -16,6 +16,6 @@ class Solution:
         self.nums = nums
         self.allSubsets = []
         self.backTrace([], 0)
-        
+
         return self.allSubsets
         
