@@ -32,8 +32,6 @@ class Solution {
             backTrack(index+1);
             children_cookies[i] -= cookies_bag[index];            
         }
-        
-        
     }
 
     public int distributeCookies(int[] cookies, int k) {
@@ -41,7 +39,7 @@ class Solution {
         cookies_bag = cookies;
         num_of_children = k;
         backTrack(0);
-        
+
         return minimum_fairness;
     }
 }
