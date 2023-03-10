@@ -14,7 +14,7 @@ class Solution:
             rightInt = integ(right)
             
 
-            if integ(right)+1 == leftInt:
+            if rightInt+1 == leftInt:
                 self.possible  = True
                 return True
 
@@ -25,6 +25,7 @@ class Solution:
                 if leftInt == integ(right[:i]) + 1:
                     if backTrack(right[:i], right[i:]):
                         return True
+
             return False
 
         for i in range(1,len(s)):
