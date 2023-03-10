@@ -1,6 +1,6 @@
 class Solution:
     
-    def backTrace(self, arr:List[int], index:int) -> None:
+    def backTrace(self, arr:List[int], index:int):
 
         if index == len(self.nums):
             self.allSubsets.append(arr)
