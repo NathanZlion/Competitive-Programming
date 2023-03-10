@@ -1,22 +1,22 @@
 # Definition for singly-linked list.
-# class ListNode(object):
+# class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Solution(object):
-    def middleNode(self, head):
-        length = 0
-        curr = head
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        dummyNode = ListNode(-1, head)
+        ptr1 = dummyNode
+        ptr2 = dummyNode
         
-        while curr:
-            curr = curr.next
-            length += 1
-        
-        median = head
-        mid = int(round(length/2))
-        for _ in range(mid):
-            median = median.next
-        
-        return median
-        
-        
+        while ptr2:
+            ptr1 = ptr1.next
+            ptr2 = ptr2.next
+            if not ptr2:
+                break
+            ptr2 = ptr2.next
+
+
+        return ptr1
+            
+            
