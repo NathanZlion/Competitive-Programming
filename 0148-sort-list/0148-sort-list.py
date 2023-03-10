@@ -47,7 +47,7 @@ class Solution:
         while not(curr.next is midPoint):
             curr = curr.next
         curr.next = None
-        print(head.val, midPoint.val)
+
         return self.merge(self.sort(head), self.sort(midPoint))
 
     def sortList(self, head):
