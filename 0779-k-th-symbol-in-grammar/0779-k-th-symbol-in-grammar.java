@@ -5,9 +5,9 @@ class Solution {
 
     public static int findMaxIndex(int currIdx, int depthDce){
         for (int i = 0; i < depthDce; i++){
-            currIdx *= 2;
-            currIdx += 1;
+            currIdx = currIdx * 2 +1;
         }
+
         return currIdx;
     }
 
@@ -18,23 +18,16 @@ class Solution {
     }
 
     public static int backTrack(int value, int depth, int column){
-
-        if (depth == row){
-            return value;
-        }
-
-        if (findMaxIndex(column*2, row - depth -1) < col-1){
-            // go right
-            if (value == 0)
-                return backTrack(1, depth+1, column*2+1);
-
-            return backTrack(0, depth+1, column*2+1);
-        }
+        int result;
+        if (depth == row) return value;
         
-        // else go left
-        if (value == 0)
-            return backTrack(0, depth+1, column*2);
-
-        return backTrack(1, depth+1, column*2);
+        // go right
+        if (findMaxIndex(column*2, row - depth -1) < col-1){
+            result = value == 0? backTrack(1, depth+1, column*2+1) : backTrack(0, depth+1, column*2+1);
+        } else {
+            // go left
+            result = value == 0? backTrack(0, depth+1, column*2) : backTrack(1, depth+1, column*2);
+        }
+        return result;
     }
 }
