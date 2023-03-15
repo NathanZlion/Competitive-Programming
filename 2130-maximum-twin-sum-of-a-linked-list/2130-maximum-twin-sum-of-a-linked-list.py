@@ -12,18 +12,18 @@ class Solution:
         
         while fastPointer:
             stack.append(slowPointer.val)
-            
+
             slowPointer = slowPointer.next
             fastPointer = fastPointer.next
+
             if fastPointer:
                 fastPointer = fastPointer.next
 
         maxSum = 0
+
         while slowPointer:
             maxSum = max(maxSum, stack.pop() + slowPointer.val)
             slowPointer = slowPointer.next
         
         
         return maxSum
-            
-        
