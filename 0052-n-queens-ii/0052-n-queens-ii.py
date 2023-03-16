@@ -8,7 +8,7 @@ class Solution:
         def isValid(row, col):
 
             # check column
-            for r in range(n):
+            for r in range(row):
                 if r != row and currState[r][col] == 1:
                     return False
             
@@ -22,17 +22,7 @@ class Solution:
                 r -= 1
                 c -= 1
 
-            
-            # check diagonal bottom right
-
-            r,c = row+1, col+1
-            
-            while r < n and c < n:
-                if currState[r][c] == 1:
-                    return False
-                r += 1
-                c += 1
-
+        
 
             # check diagonal top right
             
@@ -44,15 +34,6 @@ class Solution:
                 r -= 1
                 c += 1
 
-            # check diagonal bottom left
-            
-            r,c = row+1, col-1
-            
-            while r < n and c  > -1:
-                if currState[r][c] == 1:
-                    return False
-                r += 1
-                c -= 1
             return True
             
             
