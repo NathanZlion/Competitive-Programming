@@ -18,5 +18,4 @@ class Solution:
 
         backTrack(0, [], 0)
 
-
         return combinations
