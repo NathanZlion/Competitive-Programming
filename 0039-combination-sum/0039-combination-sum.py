@@ -2,8 +2,8 @@ class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         combinations = []
 
-        def backTrack(lst: List[int], index:int):
-            if sum(lst) > target:
+        def backTrack(sum_: int, lst: List[int], index:int):
+            if sum_ > target:
                 return 
 
             if sum(lst) == target:
@@ -12,11 +12,12 @@ class Solution:
 
             for idx in range(index, len(candidates)):
                 lst.append(candidates[idx])
-                backTrack(lst, idx)
+                backTrack(sum_ + candidates[idx],lst, idx)
                 lst.pop()
+                
 
 
-        backTrack([], 0)
+        backTrack(0, [], 0)
 
 
         return combinations
