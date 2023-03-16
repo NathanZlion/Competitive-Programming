@@ -63,6 +63,7 @@ class Solution:
         def backTrack(row):
             if row == n:
                 self.totalCount += 1
+                return
 
             for col in range(n):
                 if isValid(row, col):
