@@ -7,7 +7,7 @@ class Solution:
                 return 
 
             if sum(lst) == target:
-                combinations.append(lst[:])
+                combinations.append(lst.copy())
                 return 
 
             for idx in range(index, len(candidates)):
