@@ -14,7 +14,6 @@ class Solution:
                 lst.append(candidates[idx])
                 backTrack(sum_ + candidates[idx],lst, idx)
                 lst.pop()
-                
 
 
         backTrack(0, [], 0)
