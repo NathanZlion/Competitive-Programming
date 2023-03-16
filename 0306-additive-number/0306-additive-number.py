@@ -7,7 +7,6 @@ class Solution:
                 return False
 
             if index == len(num):
-                print(lst)
                 return True if len(lst) > 2 else False
             
             if num[index] == 0:
