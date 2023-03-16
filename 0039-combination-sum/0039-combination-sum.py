@@ -3,11 +3,11 @@ class Solution:
         combinations = []
 
         def backTrack(sum_: int, lst: List[int], index:int):
-            if sum_ > target:
+            if sum_ == target:
+                combinations.append(lst.copy())
                 return 
 
-            if sum(lst) == target:
-                combinations.append(lst.copy())
+            if sum_ > target:
                 return 
 
             for idx in range(index, len(candidates)):
