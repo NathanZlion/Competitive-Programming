@@ -5,9 +5,10 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
 
-        self.sum_ = 0
+        self.prefix_sum = 0
         dict = defaultdict(lambda: 0)
         dict[0] = 1
         self.countOfPaths = 0
@@ -16,15 +17,15 @@ class Solution:
             if not node:
                 return
             
-            self.sum_ += node.val
-            self.countOfPaths += dict[self.sum_ - targetSum]
-            dict[self.sum_] += 1
+            self.prefix_sum += node.val
+            self.countOfPaths += dict[self.prefix_sum - targetSum]
+            dict[self.prefix_sum] += 1
             
             backTrack(node.left)
             backTrack(node.right)
             
-            dict[self.sum_] -= 1
-            self.sum_ -= node.val
+            dict[self.prefix_sum] -= 1
+            self.prefix_sum -= node.val
             
         
         backTrack(root)
