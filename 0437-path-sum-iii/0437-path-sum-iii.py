@@ -7,12 +7,6 @@
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
 
-        '''
-        backtracking branches:
-         -> start from that node and go down.
-         -> add that node to the sum and go down.
-        '''
-
         self.sum_ = 0
         dict = defaultdict(int)
         dict[0] = 1
