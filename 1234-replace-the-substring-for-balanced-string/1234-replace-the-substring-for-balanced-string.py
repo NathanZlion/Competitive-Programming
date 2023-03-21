@@ -17,16 +17,12 @@ class Solution:
             
             if self.isBalanced(ctr, n//4):
                 minimumLengthSubstring = min(minimumLengthSubstring, right - left + 1)
-            
-        
-        return minimumLengthSubstring            
-            
-        
-        
-        
-        return -1
-    
+
+        return minimumLengthSubstring
+
+
     def isBalanced(self, ctr, n):
+
         for k in ctr.keys():
             if ctr[k] > n:
                 return False
