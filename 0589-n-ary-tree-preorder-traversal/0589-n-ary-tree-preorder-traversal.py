@@ -7,19 +7,18 @@ class Node:
 """
 
 class Solution:
-    
-    def traverse(self,node):
-        # append node if node
-        # traverse it's children left to right
-        if not node:
-            return
-        
-        self.lst.append(node.val)
-        
-        for child in node.children:
-            self.traverse(child)
         
     def preorder(self, root: 'Node') -> List[int]:
+        if not root: return []
         self.lst = []
-        self.traverse(root)
+        stack = [root]
+
+        while stack:
+            curr_node = stack.pop()
+            self.lst.append(curr_node.val)
+            for index in range(len(curr_node.children)-1,-1,-1):
+                
+                stack.append(curr_node.children[index])
+            
         return self.lst
+    
