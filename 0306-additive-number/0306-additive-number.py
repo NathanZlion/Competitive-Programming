@@ -8,7 +8,7 @@ class Solution:
 
             if index == len(num):
                 return True if len(lst) > 2 else False
-            
+
             if num[index] == 0:
                 return False
 
