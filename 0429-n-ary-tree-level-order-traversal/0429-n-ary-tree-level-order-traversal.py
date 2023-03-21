@@ -14,7 +14,7 @@ class Solution:
         queue = deque()
         queue.append(root)
         traversedOrder = []
-
+        
         while queue:
             length = len(queue)
             value = []
@@ -22,8 +22,8 @@ class Solution:
                 root_val = queue.popleft()
                 for child in root_val.children:
                     queue.append(child)
-
                 value.append(root_val.val)
+
             traversedOrder.append(value)
         
         return traversedOrder
