@@ -14,7 +14,8 @@ class Solution:
             graph[edge[1]].add(edge[0])
 
         # for each node check if it has all the nodes except self...
-        for node in all_nodes:
+        nodes = all_nodes.copy()
+        for node in nodes:
             all_nodes.remove(node)
             if graph[node] == all_nodes:
                 return node
