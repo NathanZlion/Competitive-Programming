@@ -39,23 +39,24 @@ class Solution:
                 return left
 
             return left if mountain_arr.get(left) == target else -1
-        else:
-            if right == mountain_arr.length():
-                return -1
 
-            return right if mountain_arr.get(right) == target else -1
+        if right == mountain_arr.length():
+            return -1
+
+        return right if mountain_arr.get(right) == target else -1
 
     def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:
-        # find the peak
+
         peak_index = self.search_peak(mountain_arr, 0, mountain_arr.length()-1)
-        
-        # perform 2 binary searches in both halves        
+
         index = -1
 
         # searching left half
         index = self.search(target, mountain_arr, -1, peak_index+1)
 
         # searching right half if not found in left
-        return self.search(target, mountain_arr, peak_index, mountain_arr.length(), False) if index == -1 else index        
+        if index == -1:
+            return self.search(target, mountain_arr, peak_index, mountain_arr.length(), False)
+        return index
         
         
