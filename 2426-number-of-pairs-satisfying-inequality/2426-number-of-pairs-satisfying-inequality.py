@@ -8,7 +8,7 @@ class Solution:
 
         self.pairCount = 0
 
-        def mergeSort(nums):
+        def mergeSort(nums: List[int]) -> List[int]:
 
             if len(nums) == 1:
                 return nums
@@ -27,7 +27,7 @@ class Solution:
             return merge(leftHalf, rightHalf)
 
         
-        def merge(arr1, arr2):
+        def merge(arr1: List[int], arr2: List[int]):
             res = []
             
             ptr1 = ptr2 = 0
