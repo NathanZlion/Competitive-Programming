@@ -69,15 +69,6 @@ class MyLinkedList:
         self.length -= 1
 
 
-    def __str__(self):
-        res = []
-        curr = self.head
-        while curr:
-            res.append(curr.val)
-            curr = curr.next
-        
-        return "->".join(map(str, res))
-
 # Your MyLinkedList object will be instantiated and called as such:
 # obj = MyLinkedList()
 # param_1 = obj.get(index)
