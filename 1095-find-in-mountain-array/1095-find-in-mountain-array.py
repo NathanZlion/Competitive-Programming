@@ -7,7 +7,7 @@
 #    def length(self) -> int:
 
 class Solution:
-    def search_peak(self, mountain_arr, left, right):
+    def search_peak(self, mountain_arr: 'MountainArray', left: int, right: int) -> int:
         if left == right:
             return left
         
@@ -19,7 +19,7 @@ class Solution:
         return self.search_peak(mountain_arr, mid+1, right)
 
 
-    def search_ascending(self, target, mountain_arr, left, right):
+    def search_ascending(self, target: int, mountain_arr: 'MountainArray', left: int, right: int) -> int:
         # left: less than or equal to
         # right: greater than
 
@@ -36,7 +36,7 @@ class Solution:
 
         return left if mountain_arr.get(left) == target else -1
     
-    def search_descending(self, target, mountain_arr, left, right):
+    def search_descending(self, target: int, mountain_arr: 'MountainArray', left: int, right: int) -> int:
         # left: greater than
         # right: less than or equal to
 
@@ -48,7 +48,7 @@ class Solution:
             else:
                 right = mid
         
-        if right >= mountain_arr.length():
+        if right == mountain_arr.length():
             return -1
         
         return right if mountain_arr.get(right) == target else -1
