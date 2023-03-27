@@ -19,26 +19,26 @@ class Solution:
         return self.search_peak(mountain_arr, mid+1, right)
 
     def search(self, target: int, mountain_arr: 'MountainArr', left: int, right: int, increasing: bool=True) -> int:
-        while right > left +1:
-            mid = left + (right - left) //2
-
-            if increasing:
-                if mountain_arr.get(mid) > target:
-                    right = mid
-                else:
-                    left = mid
-
-            else:
-                if mountain_arr.get(mid) > target:
-                    left = mid
-                else:
-                    right = mid
-            
         if increasing:
+            while right > left +1:
+                mid = left + (right - left) //2
+                if mountain_arr.get(mid) > target:
+                    right = mid
+                else:
+                    left = mid
+                    
             if left == -1:
                 return left
 
             return left if mountain_arr.get(left) == target else -1
+        
+        while right > left +1:
+            mid = left + (right - left) //2
+
+            if mountain_arr.get(mid) > target:
+                left = mid
+            else:
+                right = mid
 
         if right == mountain_arr.length():
             return -1
