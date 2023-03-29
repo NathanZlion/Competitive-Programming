@@ -1,17 +1,24 @@
 class Solution:
     def numberOfBits(self, num : int) -> int:
-        bitCount = 0
-        while num:
-            # get last bit if 1
-            bitCount += (num & 1)
-            num >>= 1
 
-        return bitCount
+        
+        bitCount = 0
+        if num in self.memo: return self.memo[num]
+        
+        return 1 + self.numberOfBits(num>>1) if num % 2 else self.numberOfBits(num>>1)
+
 
     def countBits(self, n: int) -> List[int]:
+        
+        self.memo = {
+            0:0,
+            1:1,
+        }
+    
         arr = [0 for _ in range(n+1)]
 
         for i in range(n+1):
-            arr[i] = self.numberOfBits(i)
+            self.memo[i] = self.numberOfBits(i)
+            arr[i] = self.memo[i]
 
         return arr
