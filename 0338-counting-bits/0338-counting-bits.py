@@ -3,7 +3,8 @@ class Solution:
         bitCount = 0
         while num:
             bitCount += num%2
-            num >>= 1
+            # num >>= 1
+            num //= 2
 
         return bitCount
 
