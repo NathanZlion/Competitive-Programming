@@ -2,9 +2,9 @@ class Solution:
     def numberOfBits(self, num : int) -> int:
         bitCount = 0
         while num:
-            bitCount += num%2
-            # num >>= 1
-            num //= 2
+            # get last bit if 1
+            bitCount += (num & 1)
+            num >>= 1
 
         return bitCount
 
