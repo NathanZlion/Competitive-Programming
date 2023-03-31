@@ -5,7 +5,7 @@ class Solution:
         is_prime[0] = is_prime[1] = False
 
         i = 2
-        while i <= n:
+        while i * i <= n:
             if is_prime[i]:
                 j = 2 * i
                 while j <= n:
