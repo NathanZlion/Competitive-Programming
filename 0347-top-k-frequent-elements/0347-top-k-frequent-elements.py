@@ -4,6 +4,10 @@ class Solution:
         if right - left < 1:
             return
 
+        # select random number and swap with the first index
+        random_pivot_index = random.randint(left, right)
+        arr[random_pivot_index], arr[left] = arr[left], arr[random_pivot_index]
+
         pivot = arr[left]
         write = left + 1
 
