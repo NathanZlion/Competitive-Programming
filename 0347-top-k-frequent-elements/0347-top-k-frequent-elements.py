@@ -3,7 +3,7 @@ class Solution:
     def quickSort(self, left, right, arr):
         if right - left < 1:
             return
-        
+
         pivot = arr[left]
         write = left + 1
 
@@ -25,10 +25,9 @@ class Solution:
             self.freq[num] += 1
             numsSet.add(num)
 
-        arr = []
-        for num in numsSet:
-            arr.append(num)
+        arr = [num for num in numsSet]
 
         self.quickSort(0, len(arr)-1, arr)
 
         return arr[len(arr)-k:]
+
