@@ -1,13 +1,5 @@
 class Solution:
     def numEnclaves(self, grid: List[List[int]]) -> int:
-        '''
-        0: sea cell,
-        1: land cell,
-
-        number of land cells in gris which we can't walk off boundary of grid.
-        from all boundaries try discovering neighbors.
-
-        '''
         
         neighbors = [(-1,0),(0,-1),(1,0),(0,1)]
         
@@ -16,7 +8,6 @@ class Solution:
         stack = []
 
         # top and bottom boundary
-
         firstRow = firstCol = 0
         lastRow , lastCol = rows-1, cols-1
 
@@ -26,7 +17,8 @@ class Solution:
             
             if grid[lastRow][col] == 1:
                 stack.append((lastRow, col))
-        
+
+        # left and right boundary
         for row in range(rows):
             if grid[row][firstCol] == 1:
                 stack.append((row, firstCol))
