@@ -20,7 +20,6 @@ class Solution:
             for col in range(cols):
                 if grid[row][col] == 1:
                     perimeter += 4
-
                     for neighbor in neighbors:
                         neighbor = (neighbor[0] + row, neighbor[1] + col)
                         if isLand(neighbor):
