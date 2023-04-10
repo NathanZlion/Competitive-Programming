@@ -12,6 +12,7 @@ class Solution:
             queue = deque()
             queue.append((row,col))
 
+            grid[row][col] = "2"
             while len(queue) > 0:
                 r,c = queue.popleft()
 
@@ -25,7 +26,6 @@ class Solution:
         for row in range(rowLength):
             for col in range(colLength):
                 if isInbound(row, col) and grid[row][col] == "1":
-                    grid[row][col] = "2"
                     count += 1
                     bfs(row, col)
 
