@@ -13,14 +13,13 @@ class Solution:
 
 
         def getAreaOfIsland(row, col):
-            
+
             area = 0
             stack = []
             stack.append((row, col))
             
             while stack:
                 r,c = stack.pop()
-                grid[r][c] = 0
                 area += 1
 
                 for neighbor in directions:
@@ -35,6 +34,7 @@ class Solution:
         for row in range(rowLength):
             for col in range(colLength):
                 if grid[row][col] == 1:
+                    grid[row][col] = 0
                     maxArea = max(getAreaOfIsland(row, col), maxArea)
 
 
