@@ -6,26 +6,27 @@
 #         self.right = right
 class Solution:
     def tree2str(self, root: Optional[TreeNode]) -> str:
-        
+        res = []
+
         def explore(node):
+            nonlocal res
             
             if not node:
-                return False
-
-            left = explore(node.left) if node.left else None
-            right = explore(node.right) if node.right else None
-
-            nodeStr = str(node.val)
-            if left or right:
-                if left:
-                    nodeStr += '(' + left + ')'
-                else:
-                    nodeStr += '()'
+                return
             
-            if right:
-                nodeStr += '(' + right + ')'
+            res.append(str(node.val))
+            
+            if node.left or node.right:
+                res.append('(')
+                explore(node.left)
+                res.append(')')
+            
+            if node.right:
+                res.append('(')
+                explore(node.right)
+                res.append(')')
+                
 
-            return nodeStr
-
+        explore(root)
         
-        return explore(root)
+        return ''.join(res)
