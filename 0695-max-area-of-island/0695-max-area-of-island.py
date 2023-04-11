@@ -1,3 +1,4 @@
+
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
         directions = [(1,0),(0,1),(-1,0),(0,-1)]
@@ -5,28 +6,36 @@ class Solution:
         rowLength = len(grid)
         colLength = len(grid[0])
 
-
         def isInBoundAndLand(row, col):
             return (0 <= row < rowLength) \
                     and (0 <= col < colLength) \
                     and grid[row][col] == 1
 
 
-        def dfs(row, col):
-            grid[row][col] = 0
-            count = 1
+        def getAreaOfIsland(row, col):
             
-            for x,y in directions:
-                if isInBoundAndLand(row+x, col+y):
-                    count += dfs(row+x, col+y)
+            area = 0
+            stack = []
+            stack.append((row, col))
             
-            return count
+            while stack:
+                r,c = stack.pop()
+                grid[r][c] = 0
+                area += 1
+
+                for neighbor in directions:
+                    newRow, newCol = r + neighbor[0], c + neighbor[1]
+                    if isInBoundAndLand(newRow, newCol):
+                        grid[newRow][newCol] = 0
+                        stack.append((newRow, newCol))
+
+            return area
 
 
         for row in range(rowLength):
             for col in range(colLength):
                 if grid[row][col] == 1:
-                    maxArea = max(dfs(row, col), maxArea)
+                    maxArea = max(getAreaOfIsland(row, col), maxArea)
 
 
         return maxArea
