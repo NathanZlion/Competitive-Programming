@@ -10,13 +10,12 @@ class Solution:
             nonlocal possiblePaths
             
             if path[-1] == len(graph)-1:
-                possiblePaths.append(path[:])
+                possiblePaths.append(path.copy())
 
             for neighbor in graph[currNode]:
                 path.append(neighbor)
                 explore(neighbor)
                 path.pop()
-        
         
         explore(0)
         
