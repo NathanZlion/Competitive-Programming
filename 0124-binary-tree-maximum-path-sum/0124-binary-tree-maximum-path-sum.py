@@ -9,7 +9,7 @@ class Solution:
     def findMaxPathSum(self, node: TreeNode):
         if not node:
             return 0
-        
+
         leftMax =  self.findMaxPathSum(node.left)
         rightMax =  self.findMaxPathSum(node.right)
 
@@ -20,7 +20,6 @@ class Solution:
         
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         self.currMax = -float('inf')
-        
         self.findMaxPathSum(root)
 
         return self.currMax
