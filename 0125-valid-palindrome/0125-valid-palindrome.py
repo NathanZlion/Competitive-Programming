@@ -1,20 +1,17 @@
-class Solution(object):
-    def isPalindrome(self, s):
-        arr = []
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        validCharacters = []
         for char in s:
-            if char.isalnum():
-                arr.append(char.lower())
+            if char.isalpha():
+                validCharacters.append(char.lower())
+            elif char.isdigit():
+                validCharacters.append(char)
 
-        ptr1 = 0
-        ptr2 = len(arr)-1
+        n = len(validCharacters)
+        for left in range(n//2):
+            right = n - left -1
 
-        while ptr2> ptr1:
-
-            if arr[ptr1] != arr[ptr2]:
+            if validCharacters[left] != validCharacters[right]:
                 return False
-
-            ptr1 += 1
-            ptr2 -= 1
-    
+        
         return True
-    
