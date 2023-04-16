@@ -2,10 +2,6 @@ class Solution:
     def longestPath(self, parent: List[int], s: str) -> int:
         # recursive algorithm.
         # change list to a adjecency list : Dict
-                
-        if len(parent) < 2:
-            return len(parent)
-
         
         adjecencyList = defaultdict(list)
         maximumPathLength = 0
