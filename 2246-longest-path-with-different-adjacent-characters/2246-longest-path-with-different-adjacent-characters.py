@@ -11,31 +11,28 @@ class Solution:
 
         def dfs(num):
             nonlocal maximumPathLength
-            count = 1
-            paths = []
+            firstLongestPath = 0
+            secondLongestPath = 0
 
             for child in adjecencyList[num]:
                 childPathLength = dfs(child)
 
                 if s[child] != s[num]:
-                    paths.append(childPathLength)
+                    if firstLongestPath < childPathLength:
+                        secondLongestPath = firstLongestPath
+                        firstLongestPath = childPathLength
 
-            if paths:
-                currMax = 1
+                    elif secondLongestPath < childPathLength:
+                        secondLongestPath = childPathLength
 
-                if len(paths) == 1:
-                    currMax += paths[-1]
+            maximumPathLength = max(maximumPathLength, firstLongestPath + 1 + secondLongestPath)
 
-                elif len(paths) > 1:
-                    paths.sort()
-                    currMax += paths[-1] + paths[-2]
 
-                maximumPathLength = max(maximumPathLength, currMax)
-
-            return 1 + paths.pop() if paths else 1
-
+            return 1 + firstLongestPath
 
         maximumPathLength = max(dfs(0), maximumPathLength)
+
+
         return maximumPathLength
 
 
