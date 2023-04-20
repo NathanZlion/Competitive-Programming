@@ -9,13 +9,14 @@ class Solution:
 
         def dfs(node:int, prevColor: int = 1):
             nonlocal color
+
             # if not explored already:
             if color[node] == 0:
+                # explore it, set color opposite to current
                 color[node] = -prevColor
-                
+
+                # dfs it's neighbors
                 for neighbor in graph[node]:
-                    # explore it, set color opposite to previous
-                    # and dfs it's neighbors: if false return false upward
                     if not dfs(neighbor, -prevColor):
                         return False
 
@@ -24,8 +25,7 @@ class Solution:
 
         for i in range(N):
             if color[i] == 0:
-                res = dfs(i)
-                if not res:
+                if not dfs(i):
                     return False
 
         return True
