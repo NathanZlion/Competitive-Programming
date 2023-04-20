@@ -1,6 +1,8 @@
 class Solution:
     def possibleBipartition(self, n: int, dislikes: List[List[int]]) -> bool:
         dislikeList = defaultdict(list)
+        # 0 = unexplored
+        # 1, -1 = the two groups
 
         for edge in dislikes:
             dislikeList[edge[0]].append(edge[1])
