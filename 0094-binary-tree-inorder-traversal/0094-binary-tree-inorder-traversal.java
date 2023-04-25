@@ -14,7 +14,8 @@
  * }
  */
 class Solution {
-    ArrayList<Integer> values = new ArrayList<Integer>();
+    ArrayList<Integer> values = new ArrayList<>();
+
     public void traverse(TreeNode node){
         if (node != null){
             traverse(node.left);
