@@ -11,14 +11,14 @@ class BSTIterator:
         self.traversal = []
         self.inorderTraverse(root)
         self.curr = -1
-        
+
     def inorderTraverse(self, node: Optional[TreeNode]) -> None:
         if (node):
             self.inorderTraverse(node.left)
             self.traversal.append(node.val)
             self.inorderTraverse(node.right)
 
-    def next(self) -> Optional[int]:
+    def next(self) -> int:
         self.curr += 1
         return self.traversal[self.curr]
         
