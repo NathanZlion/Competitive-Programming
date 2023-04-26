@@ -19,20 +19,11 @@ class Solution:
         def isInbound(row, col):
             return 0 <= row < M and 0 <= col < N
 
-        def allRotten() -> bool:
-            for row in range(M):
-                for col in range(N):
-                    if grid[row][col] == 1:
-                        return False
-            
-            return True
-                
-            
         # first add all rotten tomatoes into the queue
         queue = deque()
         for row in range(M):
             for col in range(N):
-                if grid[row][col] == 2: # if rotten
+                if grid[row][col] == 2:  # if rotten
                     queue.append(((row, col)))
 
         minutesPassed = 0
@@ -50,7 +41,14 @@ class Solution:
                             queue.append((currRow + r, currCol + c))  # add it to the queue
                 
             if len(queue) > 0: minutesPassed += 1
+        
+        
+        for row in range(M):
+            for col in range(N):
+                if grid[row][col] == 1:
+                    return -1   # if there are any fresh tomatoes return -1
 
-        return minutesPassed if allRotten() else -1
+        return minutesPassed
 
+    
         
