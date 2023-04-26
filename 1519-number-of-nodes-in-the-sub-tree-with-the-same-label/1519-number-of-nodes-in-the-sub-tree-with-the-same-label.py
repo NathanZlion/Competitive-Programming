@@ -13,6 +13,7 @@ class Solution:
             adjList[a].append(b)
             adjList[b].append(a)
 
+        # every node has atleast it self for the count
         res = [1 for _ in range(n)]
         visited = set()
 
@@ -26,12 +27,15 @@ class Solution:
                     visited.add(child)
                     self.mergeLists(labelCount, dfs(child))
 
+            # now label count should have the sum of frequencies of each alphabet in all children
+
             nodeLabelIndex = ord(labels[node]) - 97
             res[node] += labelCount[nodeLabelIndex]
             labelCount[nodeLabelIndex] += 1
 
             return labelCount
-        
+
+
         for node in range(n):
             if node not in visited:
                 visited.add(node)
