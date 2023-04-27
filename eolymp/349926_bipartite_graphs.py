@@ -2,7 +2,6 @@
 from collections import defaultdict
 import sys
 
-
 class Solution:
     def __init__(self):
         self.teams = None
@@ -29,7 +28,7 @@ class Solution:
             if n == 0: break
 
             self.number_of_nodes = n
-            number_of_edges = int(input())
+            number_of_edges = int(sys.stdin.readline())
             self.adj_list = defaultdict(list)
 
             for _ in range(number_of_edges):
