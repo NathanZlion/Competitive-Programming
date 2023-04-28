@@ -1,9 +1,6 @@
 class Solution:
     def minTime(self, n: int, edges: List[List[int]], hasApple: List[bool]) -> int:
-        """
-        construct an undirected adjecency list from the given edges.
-        using the adjecency list do a dfs and for every node check if it has children.
-        """
+
         adjList = defaultdict(list)
         for node1, node2 in edges:
             adjList[node1].append(node2)
@@ -15,6 +12,7 @@ class Solution:
         
         def dfs(node):
             nonlocal pathCost
+
             appleExistsInSubTree = False
 
             for child in adjList[node]:
@@ -22,8 +20,8 @@ class Solution:
                     continue
 
                 explored.add(child)
-                childHasApple = dfs(child)
-                if childHasApple:
+
+                if dfs(child):
                     pathCost += 2
                     appleExistsInSubTree = True
 
