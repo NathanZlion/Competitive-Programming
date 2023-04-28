@@ -22,8 +22,9 @@ class Solution:
 
         while len(queue) > 0:
             row, col = queue.popleft()
-            
+
             for r, c in directions:
+                # if less cost found this way, update ad explore from there
                 if isInbound(row + r, col + c) and mat[row+r][col+c] > mat[row][col]+1:
                     mat[row+r][col+c] = mat[row][col]+1
                     queue.append((row+r, col+c))
