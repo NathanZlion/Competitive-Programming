@@ -18,7 +18,7 @@ class Solution:
                 if mat[row][col] == 0:
                     queue.append((row, col))
                 else:
-                    mat[row][col] = float('inf')
+                    mat[row][col] = 10_000
 
         while len(queue) > 0:
             row, col = queue.popleft()
