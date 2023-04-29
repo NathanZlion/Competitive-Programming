@@ -23,11 +23,13 @@ class Solution:
         while len(queue) > 0:
             row, col = queue.popleft()
 
-            for r, c in directions:
+            for nextRow, nextCol in directions:
+                nextRow += row
+                nextCol += col
                 # if less cost found this way, update ad explore from there
-                if isInbound(row + r, col + c) and mat[row+r][col+c] > mat[row][col]+1:
-                    mat[row+r][col+c] = mat[row][col]+1
-                    queue.append((row+r, col+c))
+                if isInbound(nextRow, nextCol) and mat[nextRow][nextCol] > mat[row][col]+1:
+                    mat[nextRow][nextCol] = mat[row][col]+1
+                    queue.append((nextRow, nextCol))
 
 
         return mat
