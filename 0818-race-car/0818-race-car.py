@@ -1,12 +1,11 @@
 class Solution:
     def racecar(self, target: int) -> int:
         
-        # set((speed, position))
+        # deque((speed, position))
         queue = deque()
         queue.append((1, 0))
         visited = set()
         visited.add((1, 0))
-
 
         numOfMoves = 0
 
