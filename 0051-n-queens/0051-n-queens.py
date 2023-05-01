@@ -8,13 +8,14 @@ class Solution:
         def makeString(lst: List[List[int]]) -> List[str]:
             res = []
             for row in lst:
-                newRow = ""
+                newRow = []
                 for state in row:
-                    newRow += 'Q' if state else '.'
+                    newRow.append('Q' if state else '.')
 
-                res.append(newRow)
+                res.append("".join(newRow))
+
             return res
-                    
+
 
         def isValid(row, col):
 
@@ -43,8 +44,8 @@ class Solution:
                 c += 1
 
             return True
-            
-            
+
+
         currState = [[0 for _ in range(n)] for _ in range(n)]
         solution = []
         self.combinations = []
