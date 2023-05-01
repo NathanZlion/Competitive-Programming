@@ -8,12 +8,11 @@ class Solution:
         def makeString(lst: List[List[int]]) -> List[str]:
             res = []
             for row in lst:
-                newRow = []
+                newRow = ""
                 for state in row:
-                    newRow.append('Q' if state else '.')
+                    newRow += 'Q' if state else '.'
 
-                res.append("".join(newRow))
-
+                res.append(newRow)
             return res
 
 
