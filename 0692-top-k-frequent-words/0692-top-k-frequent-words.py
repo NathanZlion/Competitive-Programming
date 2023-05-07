@@ -6,18 +6,8 @@ class Solution:
         for word in words:
             freq[word] += 1
         
-        heap = []
-        for word, count in freq.items():
-            heap.append((count*-1, word))
+        words = list(set(words))
+        words.sort(key=lambda w: (-freq[w], w))
 
-        heapify(heap)
-        
-        res = []
-        for _ in range(k):
-            count, word = heappop(heap)
-            res.append(word)
+        return words[:k]
 
-        return res
-        
-            
-            
