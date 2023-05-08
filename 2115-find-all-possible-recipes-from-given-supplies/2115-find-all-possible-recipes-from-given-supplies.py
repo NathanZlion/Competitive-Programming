@@ -17,15 +17,17 @@ class Solution:
             queue.append(supply)
 
         resultingRecipes = []
+
         while queue:
             currRecipe = queue.popleft()
-            if (currRecipe in recipesSet):
-                resultingRecipes.append(currRecipe)
             
             for recipe in recipesFromIngredient[currRecipe]:
                 indegree[recipe] -= 1
 
                 if indegree[recipe] == 0:
+                    if (recipe in recipesSet):
+                        resultingRecipes.append(recipe)
+
                     queue.append(recipe)
 
 
