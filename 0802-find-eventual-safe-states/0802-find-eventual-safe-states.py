@@ -1,34 +1,32 @@
 class Solution:
     def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
-        
-        # lets do bfs implementation of this
-        
-        adjList = defaultdict(list)
-        
+
         indegree = defaultdict(int)
-        
+        queue = deque()
+        adjList = defaultdict(list)
+
         for index, neighbors in enumerate(graph):
             indegree[index] = len(neighbors)
             for neighbor in neighbors:
                 adjList[neighbor].append(index)
-        
-        queue = deque()
-        safeNodes = []
-        
-        for index in range(len(graph)):
-            if indegree[index] == 0:
-                queue.append(index)
-                safeNodes.append(index)
+            
+        for node in range(len(graph)):
+            if indegree[node] == 0:
+                queue.append(node)
 
         while queue:
-            currNode = queue.pop()
+            currNode = queue.popleft()
             
             for neighbor in adjList[currNode]:
                 indegree[neighbor] -= 1
-
+                
                 if indegree[neighbor] == 0:
-                    safeNodes.append(neighbor)
                     queue.append(neighbor)
 
+        safeNodes = []
+        for node in range(len(graph)):
+            if indegree[node] == 0:
+                safeNodes.append(node)
+        
+        return safeNodes
 
-        return sorted(safeNodes)
