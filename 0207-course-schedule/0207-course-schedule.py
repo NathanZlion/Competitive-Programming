@@ -1,7 +1,7 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         
-        indegree = {course: 0 for course in range(numCourses)}
+        indegree = defaultdict(int)
         graph = defaultdict(list)
         
         for a, b in prerequisites:
