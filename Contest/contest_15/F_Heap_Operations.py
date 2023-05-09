@@ -19,7 +19,7 @@ for _ in range(num_records_left):
     if len(operation) == 1:
         if not heap:
             heappush(heap, 1_000_000_000)
-            operations.append("insert "+ 1_000_000_000)
+            operations.append("insert 0")
 
         heappop(heap)
         operations.append("removeMin")
