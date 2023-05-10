@@ -20,21 +20,17 @@ class Solution:
         answer = [set() for _ in range(n)]
         while queue:
             curr = queue.pop()
-            
+
             for neighbor in adjList[curr]:
                 indegree[neighbor] -= 1
                 if indegree[neighbor] == 0:
                     queue.append(neighbor)
                 
-                
                 answer[neighbor].add(curr)
-                for ancestor in answer[curr]:
-                    answer[neighbor].add(ancestor)
-        
+                answer[neighbor] = answer[neighbor].union(answer[curr])
+
         for index, set_ in enumerate(answer):
             answer[index] = sorted(list(set_))
-        
-        
+
+
         return answer
-            
-        
