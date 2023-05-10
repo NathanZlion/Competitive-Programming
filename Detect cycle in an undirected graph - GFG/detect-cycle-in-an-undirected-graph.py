@@ -8,7 +8,6 @@ class Solution:
 
 		degree = {node: len(adj[node]) for node in range(V)}
 		queue = deque()
-		visited = set()
 
 		for node in range(V):
 		    if degree[node] == 1:
@@ -16,11 +15,10 @@ class Solution:
 		
 		while queue:
 		    curr = queue.popleft()
-		    visited.add(curr)
+	        degree[curr] = 0
 
 		    for neighbor in adj[curr]:
-		        if not neighbor in visited:
-    		        degree[curr] = 0
+		        if degree[neighbor] > 0:
     		        degree[neighbor] -= 1
     
     		        if degree[neighbor] == 1:
