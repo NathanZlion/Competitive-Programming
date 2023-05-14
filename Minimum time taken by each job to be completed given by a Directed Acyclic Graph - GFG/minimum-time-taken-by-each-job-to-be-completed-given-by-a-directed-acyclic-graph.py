@@ -1,9 +1,6 @@
 from typing import List
 from collections import defaultdict, deque
 
-from typing import List
-from collections import defaultdict, deque
-
 class Solution:
     def minimumTime(self, n : int, m : int, edges : List[List[int]]) -> int:
         
