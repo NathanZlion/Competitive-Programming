@@ -28,7 +28,7 @@ class Solution:
             
             curr = curr.next
             is_even = not is_even
-        
+
         last_odd.next = first_even
         last_even.next = None
 
