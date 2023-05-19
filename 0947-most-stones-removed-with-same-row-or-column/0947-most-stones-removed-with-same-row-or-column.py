@@ -1,42 +1,37 @@
 class Solution:
     def removeStones(self, stones: List[List[int]]) -> int:
 
-        def toInt(row, col):
-            MAXCOL = 10_000
-            return MAXCOL*row + col
+        def representative(coord):
+            while coord != reps[coord]:
+                coord = reps[coord]
 
-        def representative(num):
-            while num != reps[num]:
-                num = reps[num]
-            
-            return num
+            return coord
 
-        def union(num1, num2):
-            rep1 = representative(num1)
-            rep2 = representative(num2)
-            
+        def union(coord1, coord2):
+            rep1 = representative(coord1)
+            rep2 = representative(coord2)
+
             reps[rep1] = rep2
 
-        reps = {toInt(a,b): toInt(a,b ) for a,b in stones}
+        reps = {(a,b): (a,b) for a,b in stones}
         lastRowCol = {}
         lastColRow = {}
 
         for r,c in stones:
             if r in lastRowCol:
                 col = lastRowCol[r]
-                union(toInt(r,c), toInt(r, col))
+                union((r,c), (r, col))
 
             if c in lastColRow:
                 row = lastColRow[c]
-                union(toInt(r,c), toInt(row, c))
+                union((r,c), (row, c))
 
             lastRowCol[r] = c
             lastColRow[c] = r
 
         removedStones = 0
-        for r,c in stones:
-            num = toInt(r,c)
-            if reps[num] != num:
+        for stone in stones:
+            if reps[tuple(stone)] != tuple(stone):
                 removedStones += 1
         
         return removedStones
