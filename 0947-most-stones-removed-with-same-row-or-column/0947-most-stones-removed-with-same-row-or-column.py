@@ -10,10 +10,19 @@ class Solution:
         def union(coord1, coord2):
             rep1 = representative(coord1)
             rep2 = representative(coord2)
+            
+            # merge to rep1
+            if size[rep1] > size[rep2]:
+                reps[rep2] = rep1
+                size[rep1] = max(size[rep1], size[rep2] + 1)
 
-            reps[rep1] = rep2
+            else:
+                reps[rep1] = rep2
+                size[rep2] = max(size[rep2], size[rep1] + 1)
+
 
         reps = {(a,b): (a,b) for a,b in stones}
+        size = {(a,b): 1 for a,b in stones}
         lastRowCol = {}
         lastColRow = {}
 
