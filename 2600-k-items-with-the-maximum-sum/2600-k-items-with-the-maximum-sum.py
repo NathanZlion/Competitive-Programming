@@ -1,10 +1,9 @@
 class Solution:
     def kItemsWithMaximumSum(self, numOnes: int, numZeros: int, numNegOnes: int, k: int) -> int:
         runningSum = 0
-        
-        if k > 0:
-            runningSum += min(numOnes, k)
-            k = k-numOnes if k >= numOnes else 0
+
+        runningSum += min(numOnes, k)
+        k = k-numOnes if k >= numOnes else 0
 
         if k > 0:
             k -= numZeros
