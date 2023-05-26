@@ -1,17 +1,15 @@
 class Solution:
     def __init__(self):
-        self.memo = {}
+        self.memo = {
+            -1: 0,
+            0: 0,
+            1: 1,
+            2: 2,
+        }
 
     def climbStairs(self, n: int) -> int:
-        if n <= 0:
-            return 0
-        
-        if n == 1 or n == 2:
-            return n
-        
-        curr_ways = self.memo[n] if n in self.memo else\
-        self.climbStairs(n-1) + self.climbStairs(n-2)
-        
-        self.memo[n] = curr_ways
+        if n in self.memo:
+            return self.memo[n]
 
-        return curr_ways
+        self.memo[n] = self.climbStairs(n-1) + self.climbStairs(n-2)
+        return self.memo[n]
