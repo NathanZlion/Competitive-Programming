@@ -6,7 +6,7 @@ class Solution:
         if n <= 0:
             return 0
         
-        if n in set([1,2]):
+        if n == 1 or n == 2:
             return n
         
         curr_ways = self.memo[n] if n in self.memo else\
@@ -15,7 +15,3 @@ class Solution:
         self.memo[n] = curr_ways
 
         return curr_ways
-        
-
-
-                
