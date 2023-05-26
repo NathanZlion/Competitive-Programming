@@ -1,8 +1,6 @@
 class Solution:
     def __init__(self):
         self.memo = {
-            -1: 0,
-             0: 0,
              1: 1,
              2: 2,
         }
