@@ -1,8 +1,8 @@
 class Solution:
     def getMaximumGenerated(self, n: int) -> int:
         
-        # trying the brute force approach
-        if n == 1 or n == 0:
+        # trying the bottom up dp approach
+        if n <= 1:
             return n
         
         nums = [0 for _ in range(n+1)]
