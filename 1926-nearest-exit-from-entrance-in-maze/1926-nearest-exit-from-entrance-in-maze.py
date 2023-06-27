@@ -1,43 +1,41 @@
 class Solution:
     def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
 
-        directions = [(0,1), (1,0), (-1,0), (0,-1)]
-        rowLength = len(maze)
-        colLength = len(maze[0])
-        
-        def isInBound(row, col) -> bool:
-            return 0 <= row < rowLength and 0 <= col < colLength
-        
-        def isAnExit(row, col) -> bool:
-            return row == 0 or row == rowLength-1 or col == 0 or col == colLength-1
+        def isAnExit(row, col):
+            return row == 0 or row == len(maze) - 1 or \
+                   col == 0 or col == len(maze[0]) - 1
 
+        def isInbound(row, col):
+            return 0 <= row < len(maze) and 0 <= col < len(maze[0])
+
+        directions = [ (0, 1), (0, -1), (1, 0), (-1, 0) ]
         queue = deque()
-        maze[entrance[0]][entrance[1]] = '+'
+        maze[entrance[0]][entrance[1]] = '+'   # entrance does not count as exit
 
-        for newRow, newCol in directions:
-            newRow += entrance[0]
-            newCol += entrance[1]
+        for row, col in directions:
+            row += entrance[0]
+            col += entrance[1]
 
-            if isInBound(newRow, newCol) and maze[newRow][newCol] == '.':
-                queue.append((newRow, newCol))
-                maze[newRow][newCol] = '+'
+            if isInbound(row, col) and maze[row][col] == '.':
+                queue.append((row, col))
+        
+        numberOfSteps = 0
 
-        moves = 1
         while len(queue) > 0:
+            numberOfSteps += 1
+
             for _ in range(len(queue)):
-                row, col = queue.popleft()
-                if isAnExit(row, col):
-                    return moves
+                currRow, currCol = queue.popleft()
+                
+                if isAnExit(currRow, currCol):
+                    return numberOfSteps
+                
+                for row, col in directions:
+                    row += currRow
+                    col += currCol
 
-                for newRow, newCol in directions:
-                    newRow += row
-                    newCol += col
-
-                    if isInBound(newRow, newCol) and maze[newRow][newCol] == '.':
-                        queue.append((newRow, newCol))
-                        maze[newRow][newCol] = '+'
-
-            moves += 1
+                    if isInbound(row, col) and maze[row][col] == ".":
+                        queue.append((row, col))
+                        maze[row][col] = "+"
 
         return -1
-        
