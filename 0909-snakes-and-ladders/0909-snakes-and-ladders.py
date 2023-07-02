@@ -23,16 +23,16 @@ class Solution:
         visited.add(1)
 
         while queue:
-            start, cost = queue.popleft()
+            start, numberOfMoves = queue.popleft()
 
             if start == n**2:
-                return cost
+                return numberOfMoves
 
             for i in range(start+1, min(start+7, n*n+1)):
                 destination = linearBoard[i]
 
                 if destination not in visited:
                     visited.add(destination) 
-                    queue.append((destination, cost+1))
+                    queue.append((destination, numberOfMoves + 1))
 
         return -1
