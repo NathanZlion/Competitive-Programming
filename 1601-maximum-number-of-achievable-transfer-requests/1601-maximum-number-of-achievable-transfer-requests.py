@@ -3,19 +3,21 @@ class Solution:
         maximumAchievedTransfers = 0
         netTransaction = [0 for _ in range(n)]
 
-        def backtrack(numOfAcceptedRequests: int, requestIndex: int):
+        def backtrack(numOfAcceptedRequests: int = 0, requestIndex: int = 0):
             nonlocal netTransaction
             nonlocal maximumAchievedTransfers
-
+            
+            # gone through all requests
             if requestIndex == len(requests):
                 for netVal in netTransaction:
                     if netVal != 0:
-                        return 
+                        return
 
                 maximumAchievedTransfers = max(maximumAchievedTransfers, numOfAcceptedRequests)
                 return
-
-            # accept current transfer
+    
+            # branch to 2 possibilities
+            # 1. accept current transfer
             from_, to_ = requests[requestIndex]
             netTransaction[from_] -= 1
             netTransaction[to_] += 1
@@ -25,10 +27,10 @@ class Solution:
             netTransaction[from_] += 1
             netTransaction[to_] -= 1
 
-            # don't accept current transfer request
+            # 2. don't accept current transfer request
             backtrack(numOfAcceptedRequests, requestIndex+1)
-            
+
         
-        backtrack(0, 0)
+        backtrack()
 
         return maximumAchievedTransfers        
