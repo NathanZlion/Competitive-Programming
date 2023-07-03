@@ -4,8 +4,10 @@ class Solution:
 
         differingIndices = []
         for index in range(len(s)):
-            if s[index]  != goal[index]:
+            if s[index] != goal[index]:
                 differingIndices.append(index)
+                if len(differingIndices) > 2:
+                    return False
 
         # are identical
         if len(differingIndices) == 0:
