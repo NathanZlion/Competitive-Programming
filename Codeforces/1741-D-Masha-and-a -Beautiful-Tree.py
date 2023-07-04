@@ -4,7 +4,7 @@ from typing import List
 t = int(input())
 
 
-def is_sorted(lst: List[int], startPos: int = 0, endPos=None) -> bool:
+def is_sorted(lst: List[int], startPos: int, endPos: int) -> bool:
     """This is a custom function I imlemented to check if a list is sorted."""
     if len(lst) == 0:
         return True
@@ -51,7 +51,7 @@ def min_moves_to_beautify(arr: List[int], height: int, break_point: int) -> int:
         for i in range(break_point, end):
             arr[i] = leftHalf[i - break_point]
 
-        return left_moves + right_moves + 1x
+        return left_moves + right_moves + 1
 
 
 for _ in range(t):
@@ -63,4 +63,4 @@ for _ in range(t):
         arr=leaves, height=n, break_point=int(len(leaves) // 2)
     )
 
-    print(min_moves if is_sorted(leaves) else -1)
+    print(min_moves if is_sorted(leaves, 0, m) else -1)
