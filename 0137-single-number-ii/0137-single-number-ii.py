@@ -10,15 +10,17 @@ class Solution:
             
             for num in nums:
                 onesCount += (num & mask)
-            
-            # if count is a multiple of 3
+
+            # count is not a multiple of 3
+            # meaning it is on in the unique number
             if (onesCount % 3):
                 solution |= mask # flip on that bit
 
             mask <<= 1
         
         # if sign bit is on (is negative)
-        if solution & (1 << 31):
-            return (2 ** 32 - solution) * -1
+        if solution & (1 << 31) != 0:
+            negativeSolution = -(2 ** 32 - solution)
+            return negativeSolution
 
         return solution
