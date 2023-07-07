@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    
+
     def rob(self, root: Optional[TreeNode]) -> int:
         memo = {}
 
@@ -26,5 +26,6 @@ class Solution:
                 )
 
             return memo[(node, canPick)]
+
 
         return max(recursive(root, canPick = True), recursive(root, canPick = False))
