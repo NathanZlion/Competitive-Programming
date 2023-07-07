@@ -3,9 +3,9 @@ class Solution:
         n = len(answerKey)
         maximumNumOfConsec = 0
 
+        # traverse to maximize consecutive F
         operationsLeft = k
         left = 0
-        # traverse for consecutive F
         for right in range(n):
             if answerKey[right] == "T":
                 operationsLeft -= 1
@@ -18,9 +18,9 @@ class Solution:
 
             maximumNumOfConsec = max(maximumNumOfConsec, right - left + 1)
 
+        # traverse to maximize for consecutive T
         operationsLeft = k
         left = 0
-        # traverse for consecutive T
         for right in range(n):
             if answerKey[right] == "F":
                 operationsLeft -= 1
