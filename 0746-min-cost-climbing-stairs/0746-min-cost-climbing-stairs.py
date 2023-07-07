@@ -2,19 +2,11 @@ class Solution:
     
     def minCostClimbingStairs(self, cost: List[int]) -> int:
         
-        memo = {}
+        numOfStairs = len(cost)
+        
+        # iterative solution
+        for index in range(2, numOfStairs):
+            cost[index] += min(cost[index-1], cost[index-2])
 
-        def recursion(index):
-            # base case
-            if index == len(cost)-1 or index == len(cost)-2:
-                return cost[index]
-            
-            if index in memo:
-                return memo[index]
+        return min(cost[-1], cost[-2])
 
-            res = cost[index] + min(recursion(index+1), recursion(index+2))
-            memo[index] = res
-            return res
-
-
-        return min(recursion(0), recursion(1))
