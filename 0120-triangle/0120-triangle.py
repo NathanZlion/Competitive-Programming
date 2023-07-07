@@ -6,12 +6,11 @@ class Solution:
         # This should optimize the runtime to O(n) for the algorithm
         
         memo = {}
+        lastRow = len(triangle) - 1
+        for col in range(lastRow + 1):
+            memo[(lastRow, col)] = triangle[lastRow][col]
         
         def backTrack(row, col):
-            # base case: reach leaf node
-            if (row == len(triangle) - 1):
-                memo[(row, col)] = triangle[row][col]
-
             # the memoization
             if ((row, col) in memo):
                 return memo[(row, col)]
