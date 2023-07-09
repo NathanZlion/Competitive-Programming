@@ -1,6 +1,6 @@
 class Solution:
     def champagneTower(self, poured: int, query_row: int, query_glass: int) -> float:
-        overflow_memo = {}
+        overflow_memo = {(-1, 0): poured}
 
         def overflow(row, col):
             if (row, col) in overflow_memo:
@@ -9,17 +9,6 @@ class Solution:
             # column becomes out of bound of tree
             if col < 0 or col > row:
                 return 0.0
-
-            # reached the top cup
-            if row == 0 and col == 0:
-                remaining = poured - 1.0
-                curr_cup_overflow = remaining / 2
-
-                if remaining < 0:
-                    curr_cup_overflow = 0.0
-
-                overflow_memo[(0, 0)] = curr_cup_overflow
-                return overflow_memo[(0, 0)]
 
             curr_cup_poured = overflow(row - 1, col - 1) + overflow(row - 1, col)
             curr_cup_remaining =  curr_cup_poured - 1.0
@@ -33,12 +22,6 @@ class Solution:
 
 
         def how_full(row: int, col: int):
-            if row == 0 and col == 0:
-                if poured >= 1:
-                    return 1
-                else:
-                    return 0
-
             res = overflow(row - 1, col - 1) + overflow(row - 1, col)
 
             if res > 1:
