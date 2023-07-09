@@ -1,7 +1,7 @@
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
         if len(nums) < 3:
-            return len(nums) if len(set(nums)) == len(nums) else 1
+            return len(set(nums))
 
         diff = [-2 for _ in range(len(nums) -1)]
 
@@ -17,7 +17,7 @@ class Solution:
         def backtrack(index):
             if index in memo:
                 return memo[index]
-            
+
             max_next = 0
             for idx in range(index+1, len(diff)):
                 # if have opposite sign
