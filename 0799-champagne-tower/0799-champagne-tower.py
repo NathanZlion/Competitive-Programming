@@ -5,20 +5,21 @@ class Solution:
         def overflow(row, col):
             if (row, col) in overflow_memo:
                 return overflow_memo[(row, col)]
-            
-            # reached the top cup
-            if row == 0 and col == 0:
-                remaining : float = poured - 1.0
-                if remaining > 0.0:
-                    overflow_memo[(0, 0)] = remaining / 2
-                else:
-                    overflow_memo[(0, 0)] = 0.0
-
-                return overflow_memo[(0, 0)]
 
             # column becomes out of bound of tree
             if col < 0 or col > row:
                 return 0.0
+
+            # reached the top cup
+            if row == 0 and col == 0:
+                remaining = poured - 1.0
+                curr_cup_overflow = remaining / 2
+
+                if remaining < 0:
+                    curr_cup_overflow = 0.0
+
+                overflow_memo[(0, 0)] = curr_cup_overflow
+                return overflow_memo[(0, 0)]
 
             curr_cup_poured = overflow(row - 1, col - 1) + overflow(row - 1, col)
             curr_cup_remaining =  curr_cup_poured - 1.0
@@ -29,7 +30,7 @@ class Solution:
                 overflow_memo[(row, col)] = 0.0
 
             return overflow_memo[(row, col)]
-                
+
 
         def how_full(row: int, col: int):
             if row == 0 and col == 0:
