@@ -9,8 +9,12 @@ class Solution:
         for prev in range(len(nums)):
             for curr in range(prev + 1, len(nums)):
                 diff = nums[curr] - nums[prev]
-                current_length = dp[(prev, diff)] if (prev, diff) in dp else 1
-                current_length += 1   # accounts for curr added to sequence
+
+                if (prev, diff) in dp:
+                    current_length = dp[(prev, diff)] + 1
+                else:
+                    current_length = 2
+
                 dp[(curr, diff)] = current_length
                 max_arith_seq_len = max(max_arith_seq_len, current_length)
 
