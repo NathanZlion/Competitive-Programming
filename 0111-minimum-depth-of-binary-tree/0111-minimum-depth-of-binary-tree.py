@@ -6,23 +6,20 @@
 #         self.right = right
 class Solution:
     def minDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
         
-        self.depths = set()
-        self.depth = 1
+        def minimum_depth_of(node: TreeNode) -> int:
+            if not node.left and node.right:
+                return 1 + minimum_depth_of(node.right)
+            
+            if not node.right and node.left:
+                return 1 + minimum_depth_of(node.left)
+            
+            if not (node.left or node.right):
+                return 1
+            
+            return min(minimum_depth_of(node.left), minimum_depth_of(node.right)) + 1
+                
         
-        def backTrack(node):
-            
-            if not node:
-                return 
-
-            if not (node.right or node.left):
-                self.depths.add(self.depth)
-            
-            self.depth += 1
-            backTrack(node.right)
-            backTrack(node.left)
-            self.depth -= 1
-            
-        backTrack(root)
-
-        return min(self.depths) if self.depths else 0
+        return minimum_depth_of(root)
