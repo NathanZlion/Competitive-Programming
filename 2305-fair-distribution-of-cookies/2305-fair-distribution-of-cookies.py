@@ -1,26 +1,28 @@
 class Solution:
     def distributeCookies(self, cookies: List[int], k: int) -> int:
+        child_cookies = [0 for _ in range(k)]
+        minimum_unfairness = float('inf')
 
-        self.children_cookies = [0 for _ in range(k)]
-        self.minimum = float('inf')
+        # try every possibility of giving this to each child
+        def backtrack(cookie_bag_index: int):
+            nonlocal minimum_unfairness
 
-        def backtrack(index):
-            
-            curr_maximum = max(self.children_cookies)
-
-            if curr_maximum >= self.minimum:
-                return                
-
-            if index == len(cookies):
-                self.minimum = min(self.minimum, curr_maximum)
+            if cookie_bag_index == len( cookies ):
+                minimum_unfairness = min( minimum_unfairness, max( child_cookies ))
                 return
+            
+            curr_cookie = cookies[ cookie_bag_index ]
+            for child_index in range(k):
+                if child_cookies[child_index] + curr_cookie >= minimum_unfairness:
+                    continue
                 
-            for i in range(k):
-                self.children_cookies[i] += cookies[index]
-                backtrack(index+1)
-                self.children_cookies[i] -= cookies[index]
+                child_cookies[child_index] += curr_cookie
+                # make decision on the next bag
+                backtrack(cookie_bag_index + 1)
+                # take cookie back and give to some other kid
+                child_cookies[child_index] -= curr_cookie
 
 
         backtrack(0)
 
-        return self.minimum
+        return minimum_unfairness
