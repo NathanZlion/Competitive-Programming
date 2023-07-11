@@ -34,12 +34,12 @@ class Solution:
 
 
     def binaryTreeToGraph(self, root: TreeNode) -> Dict[int, List]:
-        graph : Dict[int, List] = {}
-        graph[root.val] = []
+        graph : Dict[int, List] = {root.val: []}
         stack : List[TreeNode] = [root]
 
-        while stack:
+        while len(stack) > 0:
             curr = stack.pop()
+
             if curr.left:
                 graph[curr.val].append(curr.left.val)
                 graph[curr.left.val] = [curr.val]
