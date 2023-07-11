@@ -1,45 +1,53 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+from typing import List, Dict
 
 class Solution:
     def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
+        if k == 0:
+            return [target.val]
 
-        adjList = defaultdict(list)
+        graph: Dict[int, List] = self.binaryTreeToGraph(root)
 
-        def explore(node: TreeNode) -> None:
+        queue = deque([target.val])
+        visited = set([target.val])
 
-            if node.left:
-                adjList[node.val].append(node.left.val)
-                adjList[node.left.val].append(node.val)
-                explore(node.left)
+        # move k steps from the target
+        for steps in range(k):
+            if len(queue) == 0:
+                return []
 
-            if node.right:
-                adjList[node.val].append(node.right.val)
-                adjList[node.right.val].append(node.val)
-                explore(node.right)
+            for _ in range(len(queue)):
+                curr = queue.popleft()
 
+                for neighbor in graph[curr]:
+                    if not neighbor in visited:
+                        queue.append(neighbor)
+                        visited.add(neighbor)
 
-        def findAtDepth(source: int, depth: int) -> List[int]:
-            queue = deque()
-            queue.append(source)
-            visited = set()
-            visited.add(source)
-
-            for _ in range(depth):
-                if not queue:                    
-                    return []
-
-                for __ in range(len(queue)):
-                    curr = queue.popleft()
-
-                    for neighbor in adjList[curr]:
-                        if not neighbor in visited:
-                            visited.add(neighbor)
-                            queue.append(neighbor)
-
-            return [ _ for _ in queue ]
+        return list(queue)
 
 
-        if root:
-            explore(root)
+    def binaryTreeToGraph(self, root: TreeNode) -> Dict[int, List]:
+        graph : Dict[int, List] = {}
+        graph[root.val] = []
+        stack : List[TreeNode] = [root]
 
+        while stack:
+            curr = stack.pop()
+            if curr.left:
+                graph[curr.val].append(curr.left.val)
+                graph[curr.left.val] = [curr.val]
+                stack.append(curr.left)
 
-        return findAtDepth(target.val, k)
+            if curr.right:
+                graph[curr.val].append(curr.right.val)
+                graph[curr.right.val] = [curr.val]
+                stack.append(curr.right)
+
+        return graph
