@@ -5,7 +5,7 @@ class Solution:
         
         for index in range(1, len(prices)):
             curr_price = prices[index]
-            min_price = min(min_price, curr_price)
             max_profit = max(max_profit, curr_price - min_price)
+            min_price = min(min_price, curr_price)
 
         return max_profit
