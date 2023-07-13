@@ -8,10 +8,7 @@ class Solution:
                 top = grid[row-1][col] if isInbound(row-1, col) else None
                 left = grid[row][col-1] if isInbound(row, col-1) else None
 
-                if top == None and left == None:
-                    continue
-
-                elif top != None and left != None:
+                if top != None and left != None:
                     grid[row][col] = grid[row][col] + min(top, left)
 
                 elif top != None:
