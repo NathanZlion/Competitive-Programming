@@ -1,30 +1,32 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        
-        indegree = defaultdict(int)
-        graph = defaultdict(list)
-        
-        for a, b in prerequisites:
-            graph[b].append(a)
-            indegree[a] += 1
+        # building adjList and prerequisitedCount from the given prerequisites
+        adjList = defaultdict(list)
+        prerequisitedCount = defaultdict(int)
 
-        queue = deque()
+        for requiredCourse, nextCourse in prerequisites:
+            prerequisitedCount[nextCourse] += 1
+            adjList[requiredCourse]. append(nextCourse)
+        
+        # Initialize the learning queue for courses with no prerequsites.
+        learningQueue = deque()
+
         for course in range(numCourses):
-            if indegree[course] == 0:
-                queue.append(course)
-
-        while queue:
-            course = queue.popleft()
-
-            for neighbor in graph[course]:
-                indegree[neighbor] -= 1
-                if indegree[neighbor] == 0:
-                    queue.append(neighbor)
+            if not prerequisitedCount[course]:
+                learningQueue.append(course)
         
-        for course in range(numCourses):
-            if indegree[course] != 0:
-                return False
-        
-        return True
+        numCompletedCourses = 0
 
-        
+        while learningQueue:
+            currCourse = learningQueue.popleft()
+            numCompletedCourses += 1
+
+            # Decrement priority count for courses that have currCourse as a prerequisite
+            for nextCourse in adjList[currCourse]:
+                prerequisitedCount[nextCourse] -= 1
+
+                if not prerequisitedCount[nextCourse]:
+                    learningQueue.append(nextCourse)
+
+        # checks if all courses have been completed
+        return numCompletedCourses == numCourses
