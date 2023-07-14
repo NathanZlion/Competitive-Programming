@@ -10,6 +10,7 @@ class Solution:
             
             keyHash[char] = alphabets[index]
             index += 1
+
             if len(keyHash) == 27:
                 break
         
