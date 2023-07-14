@@ -8,7 +8,7 @@ class Solution:
         colLength = len(obstacleGrid[0])
 
         def isInbound(row, col):
-            return 0 <= row < rowLength and 0 <= col < colLength
+            return 0 <= row and 0 <= col
 
         obstacleGrid[0][0] = -1
 
