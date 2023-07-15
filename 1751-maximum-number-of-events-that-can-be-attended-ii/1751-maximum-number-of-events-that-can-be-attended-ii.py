@@ -4,7 +4,6 @@ from typing import List
 class Solution:
     def maxValue(self, events: List[List[int]], k: int) -> int:
         events = sorted(events, key=lambda x: (x[0], x[1]))
-        print(events)
 
         @cache
         def nextPossibleIndex(startIndex: int, date: int) -> int:
