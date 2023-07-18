@@ -5,6 +5,7 @@ class Node:
         self.prev = prev
         self.next = nxt
 
+
 class DoublyLinkedList:
     """recent ones are at the tail, and least recent ones at the head."""
     def __init__(self):
@@ -30,21 +31,20 @@ class DoublyLinkedList:
         nextt.prev = prevv
 
     def make_recent(self, node: Node):
-        """ 
-        brings a least recent node next to the head 
-        to the tail(more recent part)
-        """
+        """ brings a least recent node to the front """
         self.delete_node(node)
         self.push(node)
 
     def evict_least_recent(self) -> Node:
-        """delete the node next to the dummy head"""
+        """ delete the node next to the dummy head """
         node_to_evict = self.head.next
         self.delete_node(node_to_evict)
-        return node_to_evict
 
-    def get_least_recent_node(self):
+        return node_to_evict
+    
+    def get_least_recent( self ) -> Node:
         return self.head.next
+
 
 class LRUCache:
     def __init__(self, capacity: int):
@@ -68,7 +68,7 @@ class LRUCache:
             node = self.key_to_node[key]
             del self.key_to_node[key]
             self.dll.delete_node(node)
-        
+
         # add it to hash and dll
         new_node = Node(key, value)
         self.key_to_node[key] = new_node
@@ -76,7 +76,7 @@ class LRUCache:
 
         # remove any excess node
         if len(self.key_to_node) > self.capacity:
-            node_evicted = self.dll.evict_least_recent()
-            del self.key_to_node[node_evicted.key]
-
+            node_to_evict = self.dll.get_least_recent()
+            self.dll.evict_least_recent()
+            del self.key_to_node[node_to_evict.key]
 
