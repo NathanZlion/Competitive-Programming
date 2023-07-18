@@ -1,4 +1,5 @@
 class Node:
+    """ Node class with attributes key, value, prev and next. """
     def __init__(self, key=-1, value=-1, prev=None, nxt=None):
         self.key = key
         self.value = value
