@@ -1,17 +1,13 @@
 class Solution:
-    def __init__(self):
-        self.memo = {
-             1: 1,
-             2: 2,
-        }
-
     def climbStairs(self, n: int) -> int:
-        # previously computed n value
-        if n in self.memo:
-            return self.memo[n]
+        if n < 3:
+            return n
+
+        stairs_steps = [0]*n
+        stairs_steps[0] = 1
+        stairs_steps[1] = 2
+
+        for step in range(2, n):
+            stairs_steps[step] = stairs_steps[step-1] + stairs_steps[step-2]
         
-        # if n not previously computed, compute and save in memo
-        self.memo[n] = self.climbStairs(n-1) + self.climbStairs(n-2)
-
-
-        return self.memo[n]
+        return stairs_steps[-1]
