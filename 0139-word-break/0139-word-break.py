@@ -1,8 +1,14 @@
 class Solution:
+    
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        memo = {
-            len(s) : True
-        }
+        memo = {len(s) : True}
+        
+        def is_contained(word, start_index):
+            for index in range(len(word)):
+                if word[index] != s[start_index + index]:
+                    return False
+
+            return True
 
         def can_segment(index: int) -> bool:
             if index in memo:
@@ -13,7 +19,7 @@ class Solution:
                 if index + len(word) > len(s):
                     continue
                 
-                if s[index : index + len(word)] == word:
+                if is_contained(word, index):
                     if can_segment(index + len(word)):
                         memo[index] = True
                         return True
