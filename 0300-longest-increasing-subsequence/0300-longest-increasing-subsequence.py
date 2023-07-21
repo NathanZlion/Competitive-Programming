@@ -1,6 +1,5 @@
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        # from right to left: calculate the maximum
         inc_sequence = [1] * len(nums)
 
         for left in range(len(nums)-1, -1, -1):
