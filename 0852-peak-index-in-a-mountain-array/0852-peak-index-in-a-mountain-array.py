@@ -1,16 +1,19 @@
 class Solution:
     def peakIndexInMountainArray(self, arr: List[int]) -> int:
-        arr.append(-1)
+        # left = increasing
+        # right = decreasing
+        # finally find the place where the mountain peek
+        left = 0
+        right = len(arr) - 1
         
-        n = len(arr)
-        low = -1
-        high = n
         
-        while high > low+1:
-            mid = (high + low)//2
+        while right > left + 1:
+            mid = left + ((right-left)//2)
+            
+            # increasing
             if arr[mid] > arr[mid-1]:
-                low = mid
+                left = mid
             else:
-                high = mid
+                right = mid
         
-        return low
+        return left
