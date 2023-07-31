@@ -7,14 +7,16 @@ class Solution:
         cols = len(matrix[0])
 
         dp = [[0] * (cols+1) for _ in range(rows+1)]
+        # added 1 layer of 0s as a padding
         for row in range(rows):
             for col in range(cols):
                 if matrix[row][col] == "1":
                     r = row + 1
                     c = col + 1
+                    # added 1 due to the extra layers of padding on left and top
                     dp[r][c] = min(dp[r][c-1], dp[r-1][c], dp[r-1][c-1]) + 1
 
 
-        squareDimension = max([max(row) for row in dp])
+        squareDimension = max(max(row) for row in dp)
 
         return squareDimension ** 2
