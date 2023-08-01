@@ -8,11 +8,12 @@ public class Solution {
 
         while (ptr1 < word1.Length && ptr2 < word2.Length){
             merged[ptr] = word1[ptr1];
-            ptr++;
-            merged[ptr] = word2[ptr2];
-            ptr++;
             ptr1++;
+            ptr++;
+
+            merged[ptr] = word2[ptr2];
             ptr2++;
+            ptr++;
         }
 
         while (ptr1 < word1.Length){
