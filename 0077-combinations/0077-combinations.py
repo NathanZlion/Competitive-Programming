@@ -3,23 +3,15 @@ class Solution:
 
         combinations = []
 
-        def backTrack(index, path):
+        def backtrack(startIndex: int = 0, res: List[int] = []) -> None:
+            # check if the length has been reached
+            if len(res) == k:
+                combinations.append(res.copy())
 
-            if index > n+1:
-                return
+            for index in range(startIndex, n):
+                res.append(index+1)
+                backtrack(index+1, res)
+                res.pop()
 
-            if n - index + 1 + len(path) < k :
-                return
-            
-            if len(path) == k:
-                combinations.append(path[:])
-                return
-
-            nextPath = path[:]
-            nextPath.append(index)
-            backTrack(index+1, nextPath)
-            backTrack(index+1, path)        
-
-        backTrack(1, [])
-
+        backtrack()
         return combinations
