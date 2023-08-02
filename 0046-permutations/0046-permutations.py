@@ -1,19 +1,20 @@
 class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
-        self.possible_permutations = []
+    def permute(self, nums: List[int]) -> List[List[int]]:        
+        possible_permutations = []
+        
+        def permutation(arr: List[int] = [], added: set = set()) -> None:
+            if len(arr) == len(nums):
+                possible_permutations.append(arr.copy())
 
-        def backTrace(built, available):
-
-            if not available:
-                self.possible_permutations.append([i for i in built])
-                return
-
-            for i in range(len(available)):
-                built.append(available[i])
-                backTrace(built, available[:i]+available[i+1:])
-                built.pop()
+            for num in nums:
+                if num not in added:
+                    arr.append(num)
+                    added.add(num)
+                    permutation(arr, added)
+                    arr.pop()
+                    added.remove(num)
 
 
-        backTrace([], nums)
+        permutation()
 
-        return self.possible_permutations
+        return possible_permutations
