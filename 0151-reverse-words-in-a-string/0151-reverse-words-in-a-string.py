@@ -4,7 +4,8 @@ class Solution:
         total_words = len(word_list)
         middle = len(word_list)//2
 
-        for index in range(middle):
-            word_list[index], word_list[total_words - index - 1] =  word_list[total_words - index - 1] ,  word_list[index]
-        
+        for left in range(middle):
+            right = total_words - left - 1
+            word_list[left], word_list[right] =  word_list[right] ,  word_list[left]
+
         return ' '.join(word_list)
