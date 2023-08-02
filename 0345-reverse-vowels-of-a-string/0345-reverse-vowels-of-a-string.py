@@ -1,14 +1,14 @@
-import re
 
 class Solution:
     def reverseVowels(self, s: str) -> str:
+        vowel_set = set(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'])
         lst_str = list(s)
         indices = []
         vowels = []
 
         for index, char in enumerate(lst_str):
             # check if char is vowel
-            if re.match(r'[aeiouAEIOU]', char):
+            if char in vowel_set:
                 indices.append(index)
                 vowels.append(char)
 
