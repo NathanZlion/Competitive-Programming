@@ -1,30 +1,34 @@
 class Solution:
-    
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        memo = {len(s) : True}
+        deadEnds = set()
         
-        def is_contained(word, start_index):
+        def isSame(word: str, startIndex: int) -> bool:
             for index in range(len(word)):
-                if word[index] != s[start_index + index]:
+                if word[index] != s[startIndex + index]:
                     return False
-
+            
             return True
 
-        def can_segment(index: int) -> bool:
-            if index in memo:
-                return memo[index]
 
+        def canSegmentFromIndex(index: int) -> bool:
+            if index in deadEnds:
+                return False
+            
+            if index == len(s):
+                return True
+            
+            # try fitting words at that index
             for word in wordDict:
-                # avoids out of bounds error
-                if index + len(word) > len(s):
-                    continue
                 
-                if is_contained(word, index):
-                    if can_segment(index + len(word)):
-                        memo[index] = True
+                # word is too long to fit
+                if len(word) > len(s) - index:
+                    continue
+
+                if isSame(word, index):
+                    if canSegmentFromIndex(index + len(word)):
                         return True
 
-            memo[index] = False
+            deadEnds.add(index)
             return False
         
-        return can_segment(0)
+        return canSegmentFromIndex(0)
