@@ -1,23 +1,17 @@
 class Solution:
     def minimumTotal(self, triangle: List[List[int]]) -> int:
-        # my idea:
-        # store in cache when returning up not to compute again
-        # use a tuple (row, col) as a key and a minimum pathsum for it as a value
-        # This should optimize the runtime to O(n) for the algorithm
-        
         memo = {}
         lastRow = len(triangle) - 1
+
         for col in range(lastRow + 1):
             memo[(lastRow, col)] = triangle[lastRow][col]
         
         def backTrack(row, col):
-            # the memoization
-            if ((row, col) in memo):
+            if (row, col) in memo:
                 return memo[(row, col)]
 
-            # find minimum of the children and assign sum of it and my self to memo
-            min_child = min(backTrack(row + 1, col), backTrack(row + 1, col + 1))
-            memo[(row, col)] = min_child + triangle[row][col]
+            min_child_sum = min(backTrack(row + 1, col), backTrack(row + 1, col + 1))
+            memo[(row, col)] = min_child_sum + triangle[row][col]
 
             return memo[(row, col)]
 
