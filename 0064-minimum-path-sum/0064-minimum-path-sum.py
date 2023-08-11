@@ -9,13 +9,13 @@ class Solution:
                 left = grid[row][col-1] if isInbound(row, col-1) else None
 
                 if top != None and left != None:
-                    grid[row][col] = grid[row][col] + min(top, left)
+                    grid[row][col] += min(top, left)
 
                 elif top != None:
-                    grid[row][col] = grid[row][col] + top
+                    grid[row][col] += top
 
                 elif left != None:
-                    grid[row][col] = grid[row][col] + left
+                    grid[row][col] += left
 
 
         return grid[-1][-1]
