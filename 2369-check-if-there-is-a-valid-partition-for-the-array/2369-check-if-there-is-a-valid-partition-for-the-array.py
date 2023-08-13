@@ -1,31 +1,17 @@
 class Solution:
-    def validPartition(self, nums: List[int]) -> bool:
-        memo = {}
+    def validPartition(self, nums: List[int]) -> bool:        
+        dp = [False]*(len(nums) + 2)
+        dp[len(nums)] = True
+        nums.append(nums[-1]+3)
+        
+        for index in range(len(nums)-3, -1,-1):
+            dp[index] = (
+                (dp[index+2] and (nums[index] == nums[index+1])) or
+                (dp[index+3] and (nums[index] == nums[index+1] == nums[index+2])) or
+                (dp[index+3] and \
+                    (nums[index]+1 == nums[index+1]) and \
+                    (nums[index+1]+1 == nums[index+2])
+                )
+            )
 
-        def canPartitionFromIndex(index) -> bool:
-            if index in memo:
-                return memo[index]
-            
-            if index == len(nums):
-                return True
-            
-            if index > len(nums):
-                return False
-
-            # the three patterns
-            if index <= len(nums) - 2 and nums[index] == nums[index+1]:
-                if canPartitionFromIndex(index+2):
-                    return True
-
-            if index <= len(nums) - 3 and nums[index] == nums[index+1] == nums[index+2]:
-                if canPartitionFromIndex(index+3):
-                    return True
-
-            if index <= len(nums) - 3 and (nums[index]+1==nums[index+1] and nums[index+1]+1==nums[index+2]):
-                if canPartitionFromIndex(index+3):
-                    return True
-
-            memo[index] = False
-            return False
-
-        return canPartitionFromIndex(0)
+        return dp[0]
