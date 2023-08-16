@@ -12,6 +12,7 @@ class Solution:
         while end.next:
             end = end.next
             nodes_count += 1
+
         prev = dummyNode
         curr = dummyNode.next
 
