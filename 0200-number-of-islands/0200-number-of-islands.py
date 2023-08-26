@@ -4,7 +4,9 @@ class Solution:
         rowLength = len(grid)
         colLength = len(grid[0])
         neighbors = [(0,1),(1,0),(0,-1),(-1,0)]
-        isInbound = lambda row, col: 0 <= row < rowLength and 0 <= col < colLength
+
+        def isInbound(row, col):
+            return -1 < row < rowLength and -1 < col < colLength
 
         def bfs(row, col):
             nonlocal grid
@@ -18,16 +20,15 @@ class Solution:
 
                 for neighbor in neighbors:
                     nRow, nCol = r + neighbor[0], c + neighbor[1]
-                    if isInbound(nRow, nCol) and grid[nRow][nCol] == "1":   # a land neighbor not explored yet
-                        grid[nRow][nCol] = "2"
+                    # a land neighbor not explored yet
+                    if isInbound(nRow, nCol) and grid[nRow][nCol] == "1":
+                        grid[nRow][nCol] = "0"
                         queue.append((nRow, nCol))
-
 
         for row in range(rowLength):
             for col in range(colLength):
-                if isInbound(row, col) and grid[row][col] == "1":
+                if grid[row][col] == "1":
                     count += 1
                     bfs(row, col)
-
 
         return count
