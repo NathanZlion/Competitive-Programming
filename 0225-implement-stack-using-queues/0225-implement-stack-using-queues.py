@@ -1,24 +1,38 @@
 class MyStack:
-
+    """Uses standard operations of a queue, push to back and peeks/pops from front"""
     def __init__(self):
-        self.lst = []        
+        self.primaryQueue = deque()
+        self.secondaryQueue = deque()
+        self.length = 0
+        """
+        I am thinking when you push you do a normal operation, add to the end.
+        But when you pop. You have to pop from the other end all the way to the
+        last number. then hold that and reorganize the original one by pushing.
+        """
 
     def push(self, x: int) -> None:
-        self.lst.append(x)
-        
+        self.primaryQueue.append(x)
+        self.length += 1
 
     def pop(self) -> int:
-        return self.lst.pop()
-        
+        while self.primaryQueue:
+            self.secondaryQueue.append(self.primaryQueue.popleft())
 
-    def top(self) -> int:
-        return self.lst[-1]
+        while len(self.secondaryQueue) > 1:
+            self.primaryQueue.append(self.secondaryQueue.popleft())
+
+        self.length -= 1
+        return self.secondaryQueue.popleft()
         
+    def top(self) -> int:
+        return self.primaryQueue[-1]        
 
     def empty(self) -> bool:
-        return len(self.lst) == 0
-        
+        return len(self) == 0
 
+    def __len__(self) -> int:
+        return self.length
+        
 
 # Your MyStack object will be instantiated and called as such:
 # obj = MyStack()
