@@ -1,4 +1,5 @@
 class Solution:
+    @cache
     def numberOfBits(self, num : int) -> int:
         if num in self.memo:
             return self.memo[num]
