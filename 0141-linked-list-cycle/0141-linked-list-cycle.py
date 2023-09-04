@@ -6,14 +6,16 @@
 
 class Solution(object):
     def hasCycle(self, head):
-        curr = head
-        nodeSet = set()
-        while curr:
-            if curr in nodeSet:
-                return True
-            nodeSet.add(curr)
-            curr = curr.next
+        if not head or not head.next:
+            return False
+        slow = head
+        fast = head.next
         
-        return False
+        while slow != fast:
+            if not fast or not fast.next:
+                return False
             
-        
+            slow = slow.next
+            fast = fast.next.next
+            
+        return True
