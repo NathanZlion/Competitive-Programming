@@ -35,9 +35,9 @@ class Solution:
                 curr = curr.next
                 i += 1
                 
-            if not curr:
-                return res
+            if not curr: return res
             
+            # cut the connection between this and the next partition
             nxt = curr.next
             curr.next = None
             curr = nxt
