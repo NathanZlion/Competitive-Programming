@@ -7,8 +7,10 @@ class Solution:
             curr.next = prev
             prev = curr
             curr = nxt
+
             if not curr:
                 break
+
             nxt = curr.next
 
 
@@ -22,16 +24,16 @@ class Solution:
         preLeft = curr
         curr = curr.next
         leftPtr = curr
-        
+
         for _ in range(right-left):
             curr = curr.next
-        
+
         rightPtr = curr
         nxtRight = rightPtr.next
         rightPtr.next = None
-        
+
         Solution.__reverse(prev=preLeft, curr=leftPtr)
         preLeft.next = rightPtr
         leftPtr.next = nxtRight
-        
+
         return dummyHead.next
