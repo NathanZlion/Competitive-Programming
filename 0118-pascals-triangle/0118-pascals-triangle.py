@@ -9,5 +9,3 @@ class Solution:
                 res[row][col] = res[row-1][col-1] + res[row-1][col]
         
         return res
-            
-    
