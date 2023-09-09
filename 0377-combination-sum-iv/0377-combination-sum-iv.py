@@ -1,6 +1,5 @@
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
-
         nums.sort()
         memo = {}
 
@@ -21,7 +20,7 @@ class Solution:
 
             memo[(currNum, currTarget)] = sumOfCombinations
 
-            return memo[(currNum, currTarget)]
+            return sumOfCombinations
 
 
         return combination(0, target)
