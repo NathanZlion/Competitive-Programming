@@ -13,10 +13,9 @@ class Solution:
             elif s[left] == s[right]:
                 return 2 + palindromeLength(left+1, right-1)
 
-            else:
-                return max (
-                        palindromeLength(left+1, right),
-                        palindromeLength(left, right-1)
-                    )
+            return max (
+                palindromeLength(left+1, right),
+                palindromeLength(left, right-1)
+            )
 
         return palindromeLength(left = 0, right= len(s)-1)
