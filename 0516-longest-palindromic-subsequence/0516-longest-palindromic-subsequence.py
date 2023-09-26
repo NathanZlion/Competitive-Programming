@@ -3,19 +3,19 @@ class Solution:
         n = len(s)
 
         @cache
-        def palindromeLength(left, right):
-            if right == left:
+        def dp(left, right):
+            if left == right:
                 return 1
-
-            elif right == left + 1:
+            
+            if left == right - 1:
                 return 2 if s[left] == s[right] else 1
+            
+            if s[left] == s[right]:
+                return 2 + dp(left+1, right-1)
 
-            elif s[left] == s[right]:
-                return 2 + palindromeLength(left+1, right-1)
-
-            return max (
-                palindromeLength(left+1, right),
-                palindromeLength(left, right-1)
+            return max(
+                dp(left+1, right),
+                dp(left, right-1)
             )
-
-        return palindromeLength(left = 0, right= len(s)-1)
+        
+        return dp(0, n-1)
