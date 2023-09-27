@@ -1,19 +1,18 @@
 class TrieNode:
-    def __init__(self, val: str):
-        self.val = val
+    def __init__(self):
         self.children = {}
         self.isEndOfWord = False
         self.wordCount = 1
 
 class Trie:
     def __init__(self):
-        self.root = TrieNode('*')
+        self.root = TrieNode()
     
     def insertWord(self, word: str) -> None:
         curr = self.root
         for char in word:
             if char not in curr.children:
-                curr.children[char] = TrieNode(char)
+                curr.children[char] = TrieNode()
             else:
                 curr.children[char].wordCount += 1
 
