@@ -1,7 +1,6 @@
 class TrieNode:
     def __init__(self):
         self.children = {}
-        self.isEndOfWord = False
         self.wordCount = 1
 
 class Trie:
@@ -16,10 +15,8 @@ class Trie:
             else:
                 curr.children[char].wordCount += 1
 
-            curr = curr.children[char]
-        
-        curr.isEndOfWord = True    
-    
+            curr = curr.children[char] 
+
     def insertWords(self, words: List[str]) -> None:
         for word in words:
             self.insertWord(word)
@@ -33,13 +30,13 @@ class Solution:
         res = []
 
         while curr.children.__len__() == 1:
-            child = next(iter(curr.children))
-            nextNode = curr.children[child]
+            nextChar = next(iter(curr.children))
+            nextNode = curr.children[nextChar]
 
             if nextNode.wordCount != N:
                 break
 
-            res.append(child)
+            res.append(nextChar)
             curr = nextNode
-        
+
         return ''.join(res)
