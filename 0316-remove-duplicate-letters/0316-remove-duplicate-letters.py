@@ -19,8 +19,9 @@ class Solution:
 
                 mono_stack.append(char)
                 seen.add(char)
-        
+
             count[char] -= 1
+
         return "".join(mono_stack)
                 
                     
