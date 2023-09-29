@@ -1,17 +1,17 @@
 class TrieNode:
     def __init__(self):
-        self.prefix_sum = 0
+        self.count = 0
         self.children = {}
 
-        
 class MapSum:
     def __init__(self):
         self.root = TrieNode()
         self.visited = {}
 
     def insert(self, key: str, val: int) -> None:
+        netVal = val
         if key in self.visited:
-            self.remove(key, self.visited[key])
+            netVal -= self.visited[key]
 
         curr = self.root
         for char in key:
@@ -19,7 +19,7 @@ class MapSum:
                 curr.children[char] = TrieNode()
 
             curr = curr.children[char]
-            curr.prefix_sum += val
+            curr.count += netVal
 
         self.visited[key] = val
 
@@ -31,10 +31,4 @@ class MapSum:
             
             curr = curr.children[char]
         
-        return curr.prefix_sum
-    
-    def remove(self, key, val):
-        curr = self.root
-        for char in key:
-            curr = curr.children[char]
-            curr.prefix_sum -= val
+        return curr.count
