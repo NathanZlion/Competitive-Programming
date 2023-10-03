@@ -25,5 +25,5 @@ class Solution:
 
                 allPrerequisites[neighbor].add(curr)
                 allPrerequisites[neighbor] = allPrerequisites[neighbor].union(allPrerequisites[curr])
-        
+
         return [coursea in allPrerequisites[courseb] for coursea, courseb in queries]
