@@ -17,6 +17,5 @@ class Solution:
                     heappush(priorityQueue, (dist + weight, neighborNode))
 
         minTimeToReachAll = max(minTimes)
-        print(minTimes)
 
         return -1 if minTimeToReachAll == inf else minTimeToReachAll
