@@ -4,24 +4,18 @@ class Solution:
     def minFallingPathSum(self, grid: List[List[int]]) -> int:
         rowLength = len(grid)
         colLength = len(grid[0])
-
-        @cache
-        def minFallSumForCell(row: int, col: int) -> int:
-            # we've reached last row
-            if row == rowLength - 1:
-                return grid[row][col]
-            
-            minPathSum = inf
-            for colBelow in range(colLength):
-                if colBelow == col:
-                    continue
-
-                minPathSum = min(minPathSum, minFallSumForCell(row+1, colBelow))
-
-            return minPathSum + grid[row][col]
         
-        minPathSum = inf
-        for col in range(colLength):
-            minPathSum = min(minPathSum, minFallSumForCell(0, col))
+        for row in range(rowLength-2, -1, -1):
+            for col in range(colLength):
 
-        return minPathSum
+                minPathSumBelow = inf
+                for colBelow in range(colLength):
+                    if colBelow == col:
+                        continue
+                    
+                    minPathSumBelow = min(minPathSumBelow, grid[row+1][colBelow])
+                
+                grid[row][col] += minPathSumBelow
+        
+        return min(grid[0])
+                    
