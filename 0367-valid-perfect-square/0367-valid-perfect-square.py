@@ -1,4 +1,4 @@
-from math import log, ceil, floor, sqrt
+from math import ceil, floor, sqrt
 
 class Solution:
     def isPerfectSquare(self, num: int) -> bool:
