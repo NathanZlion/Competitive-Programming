@@ -9,5 +9,7 @@ class Solution:
         for num, freqOfNum in freq.items():
             if freqOfNum > n//3:
                 res.append(num)
+                if len(res) == 2:
+                    break
         
         return res
