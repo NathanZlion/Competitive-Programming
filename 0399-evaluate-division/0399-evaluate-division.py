@@ -1,51 +1,30 @@
-
 class Solution:
-    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-        # build the graph from the equations and values
+    def calcEquation( self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
         adjList = defaultdict(list)
-        existentKeys = set()
-        valueDict = {}
+        for val, (numerator, denominator) in zip(values, equations):
+            adjList[numerator].append((denominator, val))
+            adjList[denominator].append((numerator, 1/val))
 
-        for (numerator, denominator), quotient in zip(equations, values):
-            adjList[numerator].append(denominator)
-            adjList[denominator].append(numerator)
-            valueDict[(numerator, denominator)] = quotient
-            valueDict[(denominator, numerator)] = 1.0 / quotient
-            existentKeys.add(numerator)
-            existentKeys.add(denominator)
+        visited = set()
+        def dfs(start: str, end: str) -> float:
+            if start in visited or start not in adjList:
+                return -1
 
-        def solve( numerator: str, denominator: str) -> float:
-            if numerator == denominator:
-                return 1.000 if numerator in existentKeys else -1.000
+            visited.add(start)
 
-            visited = set()
-            visited.add(numerator)
-            # deque => numerator, denominator, runningQuotient
-            queue = deque()
-            # traverse the neighbors of the numerator
-            for deno in adjList[numerator]:
-                if deno in visited: continue
-                queue.append((deno, valueDict[(numerator, deno)]))
-                visited.add(deno)
+            if end == start:
+                return 1
 
-            while len(queue) > 0:
-                numerator, runningProd = queue.popleft()
-                if numerator == denominator:
-                    return runningProd
-                
-                for deno in adjList[numerator]:
-                    if deno in visited:
-                        continue
-
-                    queue.append((deno, runningProd * valueDict[(numerator,deno )]))
-                    visited.add(deno)
+            for deno, val in adjList[start]:
+                quotient = dfs(deno, end)
+                if quotient != -1:
+                    return val * quotient
 
             return -1
 
-        # for every query compile your answer by calculating the answer
-        answer = [0] * len(queries)
+        res = []
+        for numerator, denominator in queries:
+            res.append(dfs(numerator, denominator))
+            visited.clear()
 
-        for index, (num, deno) in enumerate(queries):
-            answer[index] = solve(num, deno)
-
-        return answer
+        return res
