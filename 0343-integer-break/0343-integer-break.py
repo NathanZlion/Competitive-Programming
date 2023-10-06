@@ -1,11 +1,11 @@
-from math import prod
+from math import pow
 
 class Solution:
     def integerBreak(self, n: int) -> int:
         def maxProductForKParts(n: int, k: int) -> int:
             remainder = n%k
-            product = (n // k+1) ** remainder
-            product *= (n // k) ** (k - remainder)
+            product = int(pow((n // k+1), remainder))
+            product *= int(pow((n // k), (k - remainder)))
 
             return product            
 
