@@ -5,8 +5,7 @@ class Solution:
             adjList[numerator].append((denominator, val))
             adjList[denominator].append((numerator, 1/val))
 
-        visited = set()
-        def dfs(start: str, end: str) -> float:
+        def dfs(start: str, end: str, visited: set) -> float:
             if start in visited or start not in adjList:
                 return -1
 
@@ -16,7 +15,7 @@ class Solution:
                 return 1
 
             for deno, val in adjList[start]:
-                quotient = dfs(deno, end)
+                quotient = dfs(deno, end, visited)
                 if quotient != -1:
                     return val * quotient
 
@@ -24,7 +23,6 @@ class Solution:
 
         res = []
         for numerator, denominator in queries:
-            res.append(dfs(numerator, denominator))
-            visited.clear()
+            res.append(dfs(numerator, denominator, set()))
 
         return res
