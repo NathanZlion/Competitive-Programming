@@ -2,7 +2,8 @@ class Solution:
     def findRadius(self, houses: List[int], heaters: List[int]) -> int:
         def closestHeaterDistance(houseLocation: int) -> int:
             """
-            finds 2 towers that are immediately to the left and right of it.
+            finds 2 towers that are immediately to the left and right of it
+            and return the minimum distance from the 2 and between the house
             """
             left = -1
             right = len(heaters)
