@@ -1,6 +1,7 @@
 class Hash:
     MOD = 10**9+7
     a = 26
+
     def __init__(self, val: int = 0, count: int = 0):
         self.val = val
         self.count = count
@@ -42,17 +43,18 @@ class Solution:
         if k > n:
             return -1
 
-        targetHashVal = Hash.hash(needle).val
+        targetHash = Hash.hash(needle)
         runningHash = Hash.hash(haystack[:k])
 
-        if runningHash.val == targetHashVal and haystack[:k] == needle:
+        if runningHash.val == targetHash.val and haystack[:k] == needle:
             return 0
-        
+
+        # slide the window
         for i in range(1, n - k + 1):
             runningHash.addFirst(haystack[i + k - 1])
             runningHash.pollLast(haystack[i - 1])
 
-            if runningHash.val == targetHashVal:
+            if runningHash.val == targetHash.val:
                 if haystack[i:i + k] == needle:
                     return i
         
