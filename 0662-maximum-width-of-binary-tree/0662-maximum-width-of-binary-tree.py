@@ -4,40 +4,29 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+from math import inf
+
 class Solution:
     def widthOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        
-        levels = []
+        maxWidth = 0
+        minIndex, maxIndex = inf, -inf
+        level = deque()
+        level.append((0, root))
 
-        def backTrack(node, index, depth):
-            if not node:
-                return
+        while level:
+            for _ in range(len(level)):
+                index, node = level.popleft()
+                minIndex = min(minIndex, index)
+                maxIndex = max(maxIndex, index)
+
+                if node.left:
+                    level.append((index*2, node.left))
+
+                if node.right:
+                    level.append((index*2+1, node.right))
+
+            maxWidth = max(maxWidth, maxIndex - minIndex + 1)
+            minIndex, maxIndex = inf, -inf
             
-            if depth >= len(levels):
-                levels.append([index])
-                
-            else:
-                if len(levels[depth]) > 1:
-                    levels[depth].pop()
-
-                levels[depth].append(index)
-
-            backTrack(node.left, index*2, depth+1)
-            backTrack(node.right, index*2+1, depth+1)
-        
-        
-        backTrack(root, 0, 0)
-        
-        maxWidth = -1
-
-        for arr in levels:
-            maxWidth = max(maxWidth, arr[-1]-arr[0]+1)
-        
         return maxWidth
-            
-            
-            
-            
-            
-            
-        
