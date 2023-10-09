@@ -42,9 +42,6 @@ class Solution:
         if k > n:
             return -1
 
-        if k == 0:
-            return 0
-
         targetHashVal = Hash.hash(needle).val
         runningHash = Hash.hash(haystack[:k])
 
@@ -54,6 +51,7 @@ class Solution:
         for i in range(1, n - k + 1):
             runningHash.addFirst(haystack[i + k - 1])
             runningHash.pollLast(haystack[i - 1])
+
             if runningHash.val == targetHashVal:
                 if haystack[i:i + k] == needle:
                     return i
