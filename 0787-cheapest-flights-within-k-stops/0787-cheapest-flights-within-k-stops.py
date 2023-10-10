@@ -3,31 +3,22 @@ class Solution:
         graph = defaultdict(list)
         for city_from, city_to, flight_price in flights:
             graph[city_from].append((city_to, flight_price))
-        
-        visited = set()
-        # storing the price, node, num_of_stops
+
+        # storing the num_of_stops, price, node
         priority_queue = [(0, src, 0)]
         min_dist = defaultdict(lambda : inf)
         min_dist[src] = 0
 
         while priority_queue:
-            price, curr_node, stops = heappop(priority_queue)
-            if (curr_node, stops) in visited:
-                continue
-
-            visited.add((curr_node, stops))
-
-            if curr_node == dst:
-                return price
+            stops, curr_node, price = heappop(priority_queue)
+            if stops > k:
+                break 
 
             for next_city, cost in graph[curr_node]:
-                if min_dist[next_city] < cost + price + cost:
+                if min_dist[next_city] <= cost + price:
                     continue
 
-                if next_city == src or next_city == dst:
-                    heappush(priority_queue, (price + cost, next_city, stops))
+                min_dist[next_city] = cost + price
+                heappush(priority_queue, (stops + 1, next_city, price + cost))
 
-                elif stops < k:
-                    heappush(priority_queue, (price + cost, next_city, stops + 1))
-
-        return -1
+        return min_dist[dst] if dst in min_dist else -1
