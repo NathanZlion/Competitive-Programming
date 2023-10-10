@@ -6,7 +6,7 @@
 #         self.right = right
 class Solution:
     def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[Optional[TreeNode]]:
-        count = defaultdict(int)
+        count = {}
         res = []
         
         def traverse(node: Optional[TreeNode]) -> List[int | None]:
@@ -17,10 +17,10 @@ class Solution:
             representation.extend(traverse(node.left))
             representation.extend(traverse(node.right))
             
-            count[str(representation)] += 1
-            if count[str(representation)] == 2:
+            count[str(representation)] = count.get(str(representation), 0) + 1
+            if count.get(str(representation), 0) == 2:
                 res.append(node)
-            
+
             return representation
 
         traverse(root)
