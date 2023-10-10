@@ -4,24 +4,27 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
 class Solution:
     def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[Optional[TreeNode]]:
-        count = {}
         res = []
-        
+        repr_id = {}
+        count = defaultdict(int)
+
         def traverse(node: Optional[TreeNode]) -> List[int | None]:
             if not node:
-                return ["#"]
+                return 0
 
-            representation = [node.val]
-            representation.extend(traverse(node.left))
-            representation.extend(traverse(node.right))
+            representation = (traverse(node.left), node.val, traverse(node.right))
+            if representation not in repr_id:
+                repr_id[representation] = len(repr_id) + 1
             
-            count[str(representation)] = count.get(str(representation), 0) + 1
-            if count.get(str(representation), 0) == 2:
+            count[representation] += 1
+            if count[representation] == 2:
                 res.append(node)
 
-            return representation
+            return repr_id[representation]
+
 
         traverse(root)
         return res
