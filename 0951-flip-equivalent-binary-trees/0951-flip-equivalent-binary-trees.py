@@ -18,8 +18,8 @@ class Solution:
             if node1.val == node2.val:
                 # swapped or not swapped
                 return (
-                    areEquivalent(node1.left, node2.left) and areEquivalent(node1.right, node2.right) or
-                    areEquivalent(node1.left, node2.right) and areEquivalent(node1.right, node2.left)
+                    (areEquivalent(node1.left, node2.left) and areEquivalent(node1.right, node2.right)) or
+                    (areEquivalent(node1.left, node2.right) and areEquivalent(node1.right, node2.left))
                 )
             
             return False
