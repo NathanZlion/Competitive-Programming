@@ -4,11 +4,11 @@ class Solution:
         ans = n
         new_nums = sorted(set(nums))
         
-        for i in range(len(new_nums)):
-            left = new_nums[i]
+        for start in range(len(new_nums)):
+            left = new_nums[start]
             right = left + n - 1
-            j = bisect_right(new_nums, right)
-            count = j - i
-            ans = min(ans, n - count)
+            pos = bisect_right(new_nums, right)
+            remaining = n - (pos - start)
+            ans = min(ans, remaining)
 
         return ans
