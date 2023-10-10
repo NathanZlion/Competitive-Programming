@@ -11,7 +11,7 @@ class Solution:
         
         def traverse(node: Optional[TreeNode]) -> List[int | None]:
             if not node:
-                return [None]
+                return ["#"]
 
             representation = [node.val]
             representation.extend(traverse(node.left))
