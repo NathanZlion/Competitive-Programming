@@ -4,7 +4,7 @@ class Solution:
         for city_from, city_to, flight_price in flights:
             graph[city_from].append((city_to, flight_price))
 
-        # storing the num_of_stops, price, node
+        # storing the ( stops, node, price )
         priority_queue = [(0, src, 0)]
         min_dist = defaultdict(lambda : inf)
         min_dist[src] = 0
