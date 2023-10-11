@@ -5,8 +5,8 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-
-    def isSorted(self, arr: List[int]) -> bool:
+    @staticmethod
+    def isSorted(arr: List[int]) -> bool:
         for i in range(len(arr)-1):
             if arr[i] >= arr[i+1]:
                 return False
@@ -15,7 +15,6 @@ class Solution:
 
 
     def traverse(self, root: Optional[TreeNode]) -> None:
-
         if not root:
             return
 
@@ -30,4 +29,4 @@ class Solution:
         self.traverse(root)
 
 
-        return self.isSorted(self.inorderTraversal)
+        return Solution.isSorted(self.inorderTraversal)
