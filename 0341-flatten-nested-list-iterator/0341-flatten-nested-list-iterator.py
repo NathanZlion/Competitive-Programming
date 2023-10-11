@@ -23,11 +23,11 @@
 class NestedIterator:
     def __init__(self, nestedList: [NestedInteger]):
         self.ptr = 0
-        flattenedList = []
+        self.nestedList = []
         for n in nestedList:
-            flattenedList.extend(NestedIterator._flatter(n))
-            
-        self.nestedList = flattenedList
+            self.nestedList.extend(NestedIterator._flatter(n))
+
+        self.N = len(self.nestedList)
 
     def next(self) -> int:
         res = self.nestedList[self.ptr]
@@ -35,12 +35,12 @@ class NestedIterator:
         return res
 
     def hasNext(self) -> bool:
-        return self.ptr < len(self.nestedList)
+        return self.ptr < self.N
 
     def _flatter(nestedList):
         if nestedList.isInteger():
             return [nestedList]
-        
+
         res = []
         for n in nestedList.getList():
             res.extend(NestedIterator._flatter(n))
