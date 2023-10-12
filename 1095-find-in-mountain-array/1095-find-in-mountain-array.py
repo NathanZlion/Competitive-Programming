@@ -7,56 +7,47 @@
 #    def length(self) -> int:
 
 class Solution:
-    def search_peak(self, mountain_arr: 'MountainArray', left: int, right: int) -> int:
-        if left == right:
-            return left
-        
-        mid = left + (right-left)//2
+    def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:
+        N = mountain_arr.length()
 
-        if mountain_arr.get(mid) > mountain_arr.get(mid+1):
-            return self.search_peak(mountain_arr, left, mid)
-
-        return self.search_peak(mountain_arr, mid+1, right)
-
-    def search(self, target: int, mountain_arr: 'MountainArr', left: int, right: int, increasing: bool=True) -> int:
-        if increasing:
-            while right > left +1:
-                mid = left + (right - left) //2
-                if mountain_arr.get(mid) > target:
+        # binary search
+        def find_peak_of_mount_arr(mount_arr: 'MountainArray') -> int:
+            nonlocal N
+            left, right = -1, N
+            
+            while right > left + 1:
+                mid = (left + right) // 2
+                mid_val = mount_arr.get(mid)
+                has_left = (mid > 0)
+                
+                if has_left and mid_val < mount_arr.get(mid-1):
                     right = mid
                 else:
                     left = mid
-                    
-            if left == -1:
+            
+            return max(left, 0)
+
+
+        def find_target(mount_arr: 'MountainArray', l: int, r: int, isInc: bool, target: int) -> int:
+            left = l
+            right = r
+            
+            while left + 1 < right:
+                mid = (left + right) // 2
+                mid_val = mount_arr.get(mid)
+                
+                if (isInc and mid_val > target) or (not isInc and mid_val < target):
+                    right = mid
+                else:
+                    left = mid
+                
+            if left != l and mount_arr.get(left) == target:
                 return left
-
-            return left if mountain_arr.get(left) == target else -1
-        
-        while right > left +1:
-            mid = left + (right - left) //2
-
-            if mountain_arr.get(mid) > target:
-                left = mid
-            else:
-                right = mid
-
-        if right == mountain_arr.length():
+            
             return -1
+            
 
-        return right if mountain_arr.get(right) == target else -1
+        peakIdx = find_peak_of_mount_arr(mountain_arr)
+        left_half_res = find_target(mountain_arr, -1, peakIdx + 1, True, target)
 
-    def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:
-
-        peak_index = self.search_peak(mountain_arr, 0, mountain_arr.length()-1)
-
-        index = -1
-
-        # searching left half
-        index = self.search(target, mountain_arr, -1, peak_index+1)
-
-        # searching right half if not found in left
-        if index == -1:
-            return self.search(target, mountain_arr, peak_index, mountain_arr.length(), False)
-        return index
-        
-        
+        return left_half_res if left_half_res != -1 else find_target(mountain_arr, peakIdx-1, N, False, target)
