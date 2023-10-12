@@ -16,7 +16,7 @@ class Solution:
             
             leftRes = traverse(node.left)
             rightRes = traverse(node.right)
-            
+
             moves += abs(leftRes)
             moves += abs(rightRes)
 
