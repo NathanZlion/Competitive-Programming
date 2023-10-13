@@ -1,24 +1,23 @@
 class Solution:
     def maxUncrossedLines(self, nums1: List[int], nums2: List[int]) -> int:
-        nums1_len = len(nums1)
-        nums2_len = len(nums2)
-        
-        max_lines_crossed = 0
+        n = len(nums1)
+        m = len(nums2)
 
-        @cache
-        def traverse(ptr1: int, left_limit: int, lines_crossed: int) -> None:
-            nonlocal max_lines_crossed
+        dp = [[0 for _ in range(n+1)] for _ in range(m+1)]
+        for r in range(m-1, -1, -1):
+            for c in range(n-1, -1, -1):
+                if nums1[c] == nums2[r]:
+                    dp[r][c] = max (
+                        1 + dp[r+1][c+1],
+                        dp[r+1][c],
+                        dp[r][c+1],
+                    )
 
-            if ptr1 == nums1_len:
-                max_lines_crossed = max(max_lines_crossed, lines_crossed)
-                return 
-            
-            for ptr2 in range(left_limit, nums2_len):
-                if nums2[ptr2] == nums1[ptr1]:
-                    traverse(ptr1 = ptr1 + 1, left_limit = ptr2 + 1, lines_crossed = lines_crossed + 1)
-                    break
-            
-            traverse(ptr1 + 1, left_limit, lines_crossed)
+                else:
+                    dp[r][c] = max (
+                        dp[r+1][c+1],
+                        dp[r+1][c],
+                        dp[r][c+1],
+                    )
 
-        traverse(0, 0, 0)
-        return max_lines_crossed
+        return dp[0][0]
