@@ -1,32 +1,33 @@
 class Solution:
     def knightDialer(self, n: int) -> int:
-        knight_jumps = [(2, 1), (2, -1), (-2, 1), (-2, -1), (1, 2), (-1, 2), (1, -2), (-1, -2)]
-        non_numeric_cells = [(3, 0), (3, 2)]
-        PHONE_PAD_ROWS = 4
-        PHONE_PAD_COLS = 3
         modulus = (10**9 + 7)
         sys.setrecursionlimit(10005)
-
-        def is_inbound(row, col):
-            return 0 <= row < PHONE_PAD_ROWS and 0 <= col < PHONE_PAD_COLS
+        knight_jumps = {
+            0: [4, 6],
+            1: [6, 8],
+            2: [7, 9],
+            3: [4, 8],
+            4: [0, 3, 9],
+            5: [],
+            6: [0, 1, 7],
+            7: [2, 6],
+            8: [1, 3],
+            9: [2, 4]
+        }
 
         @cache
-        def possibilities(row, col, jumps_left):
-            if (row, col) in non_numeric_cells or not is_inbound(row, col):
-                return 0
-
+        def possibilities(curr_cell, jumps_left):
             if jumps_left == 0:
                 return 1
 
             res = 0
-            for r, c in knight_jumps:
-                res += possibilities(row + r, col + c, jumps_left -1)
+            for next_cell in knight_jumps[curr_cell]:
+                res += possibilities(next_cell, jumps_left -1)
 
             return res % modulus
 
         res = 0
-        for row in range(4):
-            for col in range(3):
-                res += possibilities(row, col, n-1)
+        for curr_cell in range(10):
+            res += possibilities(curr_cell, n-1)
 
         return res % modulus
