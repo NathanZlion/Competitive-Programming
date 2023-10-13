@@ -1,7 +1,6 @@
 class Solution:
     def knightDialer(self, n: int) -> int:
         modulus = (10**9 + 7)
-        sys.setrecursionlimit(10005)
         knight_jumps = {
             0: [4, 6],
             1: [6, 8],
