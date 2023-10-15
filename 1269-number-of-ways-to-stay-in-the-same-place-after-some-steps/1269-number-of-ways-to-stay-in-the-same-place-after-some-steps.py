@@ -1,15 +1,5 @@
 class Solution:
     def numWays(self, steps: int, arrLen: int) -> int:
-        """
-        this problem looks like a dp problem.
-        it has two states that have to be tracked:
-        :: index
-        :: num of steps remaining
-        
-        to better understand the problem let's build a top down approach for this
-        This is a working solution yet it needs to be optimized inorder to avoid a TLE
-        """
-
         modulo = 10**9 + 7
         
         def isInbound(index: int) -> bool:
