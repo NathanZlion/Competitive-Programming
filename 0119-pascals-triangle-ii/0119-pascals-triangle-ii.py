@@ -1,6 +1,7 @@
 class Solution:
     def getRow(self, rowIndex: int) -> List[int]:
-        dp = [[0 for _ in range(rowIndex+1)] for row in range(rowIndex+1)]
+        dp = [[0 for _ in range(rowIndex+1)] for _ in range(rowIndex+1)]
+
         for r in range(rowIndex+1):
             dp[r][0] = 1
 
