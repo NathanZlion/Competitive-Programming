@@ -1,13 +1,12 @@
 class Solution:
-    @cache
     def getRow(self, rowIndex: int) -> List[int]:
-        if rowIndex == 0:
-            return [1]
+        dp = [[0 for _ in range(rowIndex+1)] for row in range(rowIndex+1)]
+        for r in range(rowIndex+1):
+            dp[r][0] = 1
 
-        prevRow = self.getRow(rowIndex-1)
-        currRow = [1 for _ in range(rowIndex+1)]
+        for row in range(1, rowIndex+1):
+            for col in range(1, row+1):
 
-        for i in range(1, rowIndex):
-            currRow[i] = prevRow[i-1] + prevRow[i]
+                dp[row][col] = dp[row-1][col-1] + dp[row-1][col]
 
-        return currRow
+        return dp[rowIndex]
