@@ -1,13 +1,13 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         n = len(s)
-        dp = [[False] * n for _ in range(n)]
+        dp = [[False for right in range(n)] for left in range(n)]
         ans = [0, 0]
-        
+
         # one letter is a palindrome for sure
         for i in range(n):
             dp[i][i] = True
-        
+
         # for 2 letters to be palindrome we need them to be same
         for i in range(n - 1):
             if s[i] == s[i + 1]:
@@ -22,4 +22,5 @@ class Solution:
                     ans = [left, right]
 
         left, right = ans
+
         return s[left: right + 1]
