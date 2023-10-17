@@ -1,36 +1,27 @@
 class Solution:
     def wiggleMaxLength(self, nums: List[int]) -> int:
-        if len(nums) < 3:
-            return len(set(nums))
-
-        diff = [-2 for _ in range(len(nums) -1)]
-
-        for index in range(len(nums) -1):
-            if nums[index] > nums[index+1]:
-                diff[index] = -1
-
-            elif nums[index] < nums[index+1]:
-                diff[index] = 1
-
-        memo = {len(nums) : 1}
-
-        def backtrack(index):
-            if index in memo:
-                return memo[index]
-
-            max_next = 0
-            for idx in range(index+1, len(diff)):
-                # if have opposite sign
-                if diff[index] + diff[idx] == 0:
-                    max_next = max(max_next, backtrack(idx))
-
-            memo[index] = max_next + 1
-            return memo[index]
-
-        for index in range(len(diff)):
-            if diff[index] != -2:
-                backtrack(index)
+        nums_length = len(nums)
         
-        if len(memo) == 1:
-            return 1
-        return max(memo.values()) + 1
+        @cache
+        def dp(index, is_increasing):
+            if index == nums_length:
+                return 0
+            
+            max_res = 1
+            for next_index in range(index + 1, nums_length):
+                if is_increasing and nums[next_index] > nums[index]:
+                    max_res = max(max_res, 1 + dp(next_index, not is_increasing))
+                elif (not is_increasing) and nums[next_index] < nums[index]:
+                    max_res = max(max_res, 1 + dp(next_index, not is_increasing))
+
+            return max_res
+        
+        
+        nums.append(-1)
+        max_res = dp(-1, True) - 1
+        nums.pop()
+        nums.append(1001)
+        max_res = max(max_res, dp(-1, False) - 1)
+        nums.pop()
+
+        return max_res
