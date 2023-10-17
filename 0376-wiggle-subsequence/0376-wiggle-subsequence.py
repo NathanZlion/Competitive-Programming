@@ -15,13 +15,10 @@ class Solution:
                     max_res = max(max_res, 1 + dp(next_index, not is_increasing))
 
             return max_res
-        
-        
+
         nums.append(-1)
         max_res = dp(-1, True) - 1
-        nums.pop()
-        nums.append(1001)
+        nums[-1] = 1001
         max_res = max(max_res, dp(-1, False) - 1)
-        nums.pop()
 
         return max_res
