@@ -1,13 +1,10 @@
 class Solution:
     def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List[int]) -> bool:
         indegreeCount = defaultdict(int)
-        
-        for node, (left, right) in enumerate(zip(leftChild, rightChild)):
-            if left != -1:
-                indegreeCount[left] += 1
 
-            if right != -1:
-                indegreeCount[right] += 1
+        for node, (left, right) in enumerate(zip(leftChild, rightChild)):
+            indegreeCount[left] += 1
+            indegreeCount[right] += 1
 
         rootNode = -1
         for node in range(n):
@@ -19,10 +16,10 @@ class Solution:
             return False
 
         visited = [False for _ in range(n)]
-        queue = deque()
-        queue.append(rootNode)
+        queue = deque([rootNode])
         while queue:
             curr = queue.popleft()
+
             if visited[curr]:
                 return False
 
