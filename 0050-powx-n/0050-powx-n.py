@@ -1,6 +1,7 @@
 class Solution:
     @cache
     def myPow(self, x: float, n: int) -> float:
+        """0(log(n)) time implementation of the power function"""
 
         if n == 0:
             return 1
@@ -17,3 +18,4 @@ class Solution:
 
         # odd power
         return self.myPow(x, n-1) * x
+    
