@@ -6,20 +6,18 @@ class Solution:
 
         self.oneDayPass, self.sevenDayPass, self.thirtyDayPass = costs
         buying_days = set(days)
+        
+        dp = [None] * (days[-1] + 31)
+        for i in range(30):
+            dp[i] = 0
 
-        @cache
-        def dp(day):
-            if day > days[-1]:
-                return 0
-
-            oneDayCost = dp(day + 1) + self.oneDayPass
-            sevenDayCost = dp(day + 7) + self.sevenDayPass
-            thirtyDayCost = dp(day + 30) + self.thirtyDayPass
-            efficientCost = min(oneDayCost, sevenDayCost, thirtyDayCost)  
-
-            if day in buying_days:
-                return efficientCost 
-
-            return min(dp(day + 1), efficientCost)
-
-        return dp(days[0])
+        for i in range(30, len(dp)):
+            onedayCost = self.oneDayPass + dp[i-1]
+            sevendayCost = self.sevenDayPass + dp[i - 7]
+            thirtydayCost = self.thirtyDayPass + dp[i - 30]
+            
+            dp[i] = min(onedayCost, sevendayCost, thirtydayCost)
+            if i - 30 not in buying_days:
+                dp[i] = min(dp[i - 1],dp[i])
+        
+        return dp[-1]
