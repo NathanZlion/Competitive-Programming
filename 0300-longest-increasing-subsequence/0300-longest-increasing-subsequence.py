@@ -1,10 +1,19 @@
+from math import inf
+
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        inc_sequence = [1] * len(nums)
+        self.N = len(nums)
+        nums.append(-inf)
 
-        for left in range(len(nums)-1, -1, -1):
-            for right in range(left + 1, len(nums)):
-                if nums[right] > nums[left]:
-                    inc_sequence[left] = max(inc_sequence[left], 1 + inc_sequence[right])
+        @cache
+        def dp(index: int) -> int:
+            res = 1
 
-        return max(inc_sequence)
+            for nextIndex in range(index+1, self.N):
+                if nums[index] < nums[nextIndex]:
+                    res = max(res, 1 + dp(nextIndex))
+                
+            return res
+        
+        return dp(-1) - 1
+    
