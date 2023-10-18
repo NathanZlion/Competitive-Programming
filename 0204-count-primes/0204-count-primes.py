@@ -1,10 +1,10 @@
 class Solution:
     
     def prime_sieve(self, n: int) -> list[bool]:
-        is_prime: list[bool] = [True for _ in range(n + 1)]
+        is_prime = [True for _ in range(n + 1)]
         is_prime[0] = is_prime[1] = False
 
-        i : int = 2
+        i = 2
 
         while i * i <= n:
             if is_prime[i]:
@@ -19,10 +19,11 @@ class Solution:
         return is_prime
 
     def countPrimes(self, n: int) -> int:
-        if n < 3: return 0
+        if n < 3:
+            return 0
 
-        count : int = 0
-        primes : list[bool] = self.prime_sieve(n-1)
+        count = 0
+        primes = self.prime_sieve(n-1)
 
         for prime in primes:
             if prime:
