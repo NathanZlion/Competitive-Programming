@@ -1,8 +1,6 @@
-import operator
-
 class Solution:
     def calculate(self, s: str) -> int:
-        s = s.replace(' ', '') # getting rid of the empty spaces
+        s = "".join(s.split()) # getting rid of the empty spaces
 
         splitted_expression = []
         operations = {
