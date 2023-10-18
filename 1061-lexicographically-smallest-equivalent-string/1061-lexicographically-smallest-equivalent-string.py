@@ -1,38 +1,27 @@
 class Solution:
     def smallestEquivalentString(self, s1: str, s2: str, baseStr: str) -> str:
-        # union every char by index of s1 and s2 and rep should be the minimum ord one
-        # then find the minimum for all chars in baseStr
-        parent = {}
-        
-        # for each character make it parent of it's own
-        for charOrd in range(ord('a'), ord('z')+1):
-            char = chr(charOrd)
-            parent[char] = char
+        rep = {char: char for char in ascii_lowercase}
+
+        def find(char):
+            """ Find with path compression """
+            if rep[char] == char:
+                return char
+
+            root_rep = find(rep[char])
+            rep[char] = root_rep
+
+            return root_rep
+
 
         def union(char1, char2):
-            # to the minimum ordinance String
-            par1 = representative(char1)
-            par2 = representative(char2)
-            
-            if par1 > par2:
-                parent[par1] = par2
+            """ Union to the smallest parent """
+            rep1 = find(char1)
+            rep2 = find(char2)
+            min_parent = min(rep1, rep2)
+            rep[rep1] = min_parent
+            rep[rep2] = min_parent
 
-            else:
-                parent[par2] = par1
-
-        def representative(char):
-            # basecase
-            if parent[char] == char:
-                return char
-            
-            theParent = representative(parent[char])
-            parent[char] = theParent
-            return theParent
-        
         for index in range(len(s1)):
             union(s1[index], s2[index])
 
-        res = [representative(char) for char in baseStr]
-
-        return "".join(res)
-        
+        return "".join([find(char) for char in baseStr])
