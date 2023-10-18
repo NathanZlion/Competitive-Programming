@@ -1,32 +1,32 @@
 class Solution:
     
-    def prime_sieve(self, n: int) -> list[bool]:
-        is_prime = [True for _ in range(n + 1)]
+    def primes_count(self, n: int) -> int:
+        """using prime sieve counts the number of prime numbers upto n"""
+        
+        if n < 3:
+            return 0
+        is_prime = [True for _ in range(n)]
         is_prime[0] = is_prime[1] = False
 
         i = 2
 
-        while i * i <= n:
+        while i * i < n:
             if is_prime[i]:
                 j = 2 * i
 
-                while j <= n:
+                while j < n:
                     is_prime[j] = False
                     j += i
 
             i += 1
 
-        return is_prime
-
-    def countPrimes(self, n: int) -> int:
-        if n < 3:
-            return 0
-
         count = 0
-        primes = self.prime_sieve(n-1)
-
-        for prime in primes:
-            if prime:
+        for num_is_prime in is_prime:
+            if num_is_prime:
                 count += 1
 
         return count
+
+    def countPrimes(self, n: int) -> int:
+
+        return self.primes_count(n)
