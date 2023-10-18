@@ -2,8 +2,7 @@ import operator
 
 class Solution:
     def calculate(self, s: str) -> int:
-        # getting rid of the empty spaces
-        s = s.replace(' ', '')
+        s = s.replace(' ', '') # getting rid of the empty spaces
 
         splitted_expression = []
         operations = {
@@ -40,4 +39,5 @@ class Solution:
 
             return stack
 
+        # first do mul and div then do add and sub operations
         return operate(['-', '+'], operate(['*','/'], splitted_expression)).pop()
