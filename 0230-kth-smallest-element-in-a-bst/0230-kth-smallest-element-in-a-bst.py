@@ -5,8 +5,8 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def traverse(self, root: Optional[TreeNode]) -> None:
 
+    def traverse(self, root: Optional[TreeNode]) -> None:
         if not root:
             return
 
@@ -14,9 +14,13 @@ class Solution:
         self.inorderTraversal.append(root.val)
         self.traverse(root.right)
 
+        if len(self.inorderTraversal) >= self.k:
+            return
+
 
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         self.inorderTraversal = []
+        self.k = k
         self.traverse(root)
         
         return self.inorderTraversal[k-1]
