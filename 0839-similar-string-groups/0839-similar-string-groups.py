@@ -5,17 +5,24 @@ class Solution:
         def union(rep, word1, word2):
             word1_parent = find(rep, word1)
             rep[word1_parent] = find(rep, word2)
+            
+            # path compression
+            while rep[word1] != word1_parent:
+                parent = rep[word1]
+                rep[word1] = word1_parent
+                word1 = parent
 
         def are_similar(word1, word2):
             diff_count = 0
+
             for i in range(len(word1)):
                 if word1[i] != word2[i]:
                     diff_count += 1
             
             return diff_count == 2
-        
-        def find(rep, word):
 
+
+        def find(rep, word):
             while rep[word] != word:
                 word = rep[word]
 
