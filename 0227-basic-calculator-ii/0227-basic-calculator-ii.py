@@ -3,7 +3,7 @@ class Solution:
         s = "".join(s.split()) # getting rid of the empty spaces
 
         splitted_expression = []
-        operations = {
+        op_func = {
             '+': operator.__add__,
             '-': operator.__sub__,
             '*': operator.__mul__,
@@ -12,7 +12,7 @@ class Solution:
 
         running_num = 0
         for char in s:
-            if char in operations:
+            if char in op_func:
                 splitted_expression.append(running_num)
                 splitted_expression.append(char)
                 running_num = 0
@@ -30,7 +30,7 @@ class Solution:
                 if isinstance(curr_char, int) or curr_char not in operators:
                     stack.append(curr_char)
                 else:
-                    stack.append(operations[curr_char](stack.pop(), expression[i+1]))
+                    stack.append(op_func[curr_char](stack.pop(), expression[i+1]))
                     i += 1
 
                 i += 1
