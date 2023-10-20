@@ -1,23 +1,20 @@
 class Solution:
     def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        minLen = 1000000
+        
+        minLength = len(nums) + 1
+        left = 0
         runningSum = 0
-        left= 0
-        n = len(nums)
 
-        for right in range(n):
+        for right in range(len(nums)):
             runningSum += nums[right]
-
+            
+            # minimize window size
             while runningSum >= target:
-                minLen = min(minLen, right-left+1)
+                minLength = min(minLength, right - left + 1)
                 runningSum -= nums[left]
                 left += 1
 
-            if runningSum >= target:
-                minLen = min(minLen, right-left+1)
-        
-        if minLen == 1000000:
-            return 0
+        if minLength <= len(nums):
+            return minLength
 
-        return minLen                
-        
+        return 0
