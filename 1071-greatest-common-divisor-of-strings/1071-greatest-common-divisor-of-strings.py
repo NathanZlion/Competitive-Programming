@@ -1,30 +1,26 @@
 class Solution:
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        max_divisor_end = -1
+        len_str1 = len(str1)
+        len_str2 = len(str2)
+        
+        def is_divisor(str1, str2, end):
+            for index in range(max(len_str1, len_str2)):
+                target = index % (end + 1)
 
-    def isDivisor(self, substring: str, string: str) -> bool:
-
-        if len(string) % len(substring):
-            return False
-
-        chunkLength = len(substring)
-        numberOfChunks = len(string) // len(substring)
-        for i in range(numberOfChunks):
-            for j in range(chunkLength):
-                idx = (i * chunkLength) + j
-                if string[idx] != substring[j]:
+                if str1[target] != str1[index % len_str1]:
                     return False
 
-        return True
+                if str1[target] != str2[index % len_str2]:
+                    return False
+            
+            return True
 
-
-    def gcdOfStrings(self, str1: str, str2: str) -> str:
-        res = ""
-
-        for index in range(min(len(str1), len(str2))):
-            if str1[index] != str2[index]:
+        for end in range(min(len_str1, len_str2)):
+            if str1[end] != str2[end]:
                 break
+            
+            if len_str1 % (end + 1) == len_str2 % (end + 1) == 0 and is_divisor(str1, str2, end):
+                max_divisor_end = end
 
-            substring = str1[:index+1]
-            if self.isDivisor(substring, str1) and self.isDivisor(substring, str2):
-                res = str1[:index+1]
-
-        return res
+        return str1[:max_divisor_end+1]
