@@ -1,31 +1,32 @@
 class Solution:
     def compress(self, chars: List[str]) -> int:
-        res = []
-
-        curr_char = chars[0]
-        count = 1
-
-        for index in range(1, len(chars)):
-            char = chars[index]
-
-            if char == curr_char:
-                count += 1
-
-            else:
-                res.append(curr_char)
-                if count > 1:
-                    for int_char in str(count):
-                        res.append(int_char)
-                
-                curr_char = char
-                count = 1
-
-        res.append(curr_char)
-        if count > 1:
-            for int_char in str(count):
-                res.append(int_char)
+        solution_arr = []
+        stack = []
         
-        for index, char in enumerate(res):
-            chars[index] = char
+        for char in chars:
+            if not stack:
+                stack.append((char, 1))
+            elif stack[-1][0] == char:
+                _, prev_freq = stack.pop()
+                stack.append((char, prev_freq + 1))
+            else:
+                prev_char, prev_freq = stack.pop()
+                solution_arr.append(prev_char)
+                if prev_freq > 1:
+                    for num_char in str(prev_freq):
+                        solution_arr.append(num_char)
 
-        return len(res)
+                stack.append((char, 1))
+
+        if stack:
+            prev_char, prev_freq = stack.pop()
+            solution_arr.append(prev_char)
+            if prev_freq > 1:
+                for num_char in str(prev_freq):
+                    solution_arr.append(num_char)
+        
+        for index, char in enumerate(solution_arr):
+            chars[index] = char
+        
+        return len(solution_arr)
+            
