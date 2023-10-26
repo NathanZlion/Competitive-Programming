@@ -1,8 +1,11 @@
 class Solution:
     def moveZeroes(self, nums: List[int]) -> None:
+        zero_ptr = 0
+        n = len(nums)
 
-        slow_ptr = 0
-        for fast_ptr in range(len(nums)):
-            if nums[fast_ptr] != 0:
-                nums[slow_ptr], nums[fast_ptr] = nums[fast_ptr], nums[slow_ptr]
-                slow_ptr += 1
+        for nonzero_ptr in range(n):
+            if nums[nonzero_ptr] != 0:
+                nums[nonzero_ptr], nums[zero_ptr] = nums[zero_ptr], nums[nonzero_ptr]
+
+            while zero_ptr <= nonzero_ptr and nums[zero_ptr] != 0:
+                zero_ptr += 1
