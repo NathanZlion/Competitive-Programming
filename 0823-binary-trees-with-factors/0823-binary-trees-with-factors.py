@@ -1,27 +1,19 @@
 class Solution:
     def numFactoredBinaryTrees(self, arr: List[int]) -> int:
         modulus = 10**9 + 7
-        arr.sort()
+        arr.sort(reverse = True)
         arr_set = set(arr)
+        n = len(arr)
+        memo = defaultdict(lambda: 0)
 
-        @cache
-        def dp(num: int) -> int:
-            res = 1
+        for curr_index in range(n-1, -1, -1):
+            curr_num = arr[curr_index]
+            for next_index in range(curr_index, n):
+                num1 = arr[next_index]
+                if curr_num % num1 == 0:
+                    num2 = curr_num // num1
+                    memo[curr_num] += (memo[num2] * memo[num1])
             
-            for i in arr:
-                if i >= num:
-                    break
+            memo[curr_num] += 1
 
-                if num % i != 0:
-                    continue
-
-                if num // i in arr_set:
-                    res += (dp(i) * dp(num // i))
-
-            return res % modulus
-
-        res = 0
-        for num in arr:
-            res += dp(num)
-
-        return res % modulus
+        return sum(memo.values()) % modulus
