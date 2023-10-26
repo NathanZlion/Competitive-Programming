@@ -22,7 +22,6 @@ class Solution:
 
         res = 0
         for num in arr:
-            print(num, dp(num))
             res += dp(num)
 
         return res % modulus
