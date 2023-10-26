@@ -1,12 +1,13 @@
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
         ptr = 0
+        n = len(s)
 
-        for index, char in enumerate(t):
-            if ptr == len(s):
+        for char in t:
+            if ptr == n:
                 return True
-        
-            if char == s[ptr]:
-                ptr+=1
-        
-        return ptr == len(s)
+
+            if s[ptr] == char:
+                ptr += 1
+
+        return ptr == n
