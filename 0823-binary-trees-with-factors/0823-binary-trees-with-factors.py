@@ -2,7 +2,6 @@ class Solution:
     def numFactoredBinaryTrees(self, arr: List[int]) -> int:
         modulus = 10**9 + 7
         arr.sort()
-        arr_set = set(arr)
         n = len(arr)
         memo = defaultdict(lambda: 0)
 
