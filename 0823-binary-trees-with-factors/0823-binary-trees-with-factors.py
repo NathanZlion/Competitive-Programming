@@ -15,5 +15,6 @@ class Solution:
                     memo[curr_num] += (memo[num2] * memo[num1])
             
             memo[curr_num] += 1
+            memo[curr_num] %= modulus
 
         return sum(memo.values()) % modulus
