@@ -1,5 +1,7 @@
 class Solution:
     def countVowelPermutation(self, n: int) -> int:
+        """ a → 0, e → 1, i → 2, o → 3, u → 4 """
+
         modulus = 1_000_000_007
         preceeded = {
             0: [1, 2, 4],
