@@ -11,14 +11,14 @@ class Solution:
             4: [2, 3]
         }
 
-        dp = [[0 for _ in range(5)] for _ in range(n+1)]
+        dp = [[0 for _ in range(5)] for _ in range(n)]
         for i in range(5):
-            dp[1][i] = 1
+            dp[0][i] = 1
 
-        for length in range(2, n+1):
+        for length in range(1, n):
             for vowel in range(5):
                 for preceeder in preceeded[vowel]:
                     dp[length][vowel] += dp[length - 1][preceeder]
                     dp[length][vowel] %= modulus
         
-        return sum(dp[n]) % modulus
+        return sum(dp[n-1]) % modulus
