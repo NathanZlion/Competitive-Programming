@@ -1,9 +1,11 @@
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        
-        compMap = dict()
+        complement_index_map = {}
+
         for i, num in enumerate(nums):
             comp = target - num
-            if num in compMap:
-                return [compMap[num],i]
-            compMap[comp] = i
+
+            if comp in complement_index_map:
+                return [complement_index_map[comp], i]
+
+            complement_index_map[num] = i
