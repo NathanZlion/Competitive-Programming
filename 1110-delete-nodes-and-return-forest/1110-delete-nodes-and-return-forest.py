@@ -7,6 +7,7 @@
 class Solution:
     def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
         res = []
+        to_delete = set(to_delete)
 
         def traverse(node: TreeNode | None, parent_deleted: bool) -> None:
             if not node:
