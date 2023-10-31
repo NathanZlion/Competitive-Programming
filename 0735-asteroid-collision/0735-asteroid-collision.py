@@ -1,32 +1,28 @@
-
 class Solution:
-    def asteroidCollision(self, asteroids: List[int]) -> List[int]:        
-
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
         stack = []
-        for num in asteroids:
-            # if it is positive just append it
-            if num > 0:
-                stack.append(num)
-
-            elif num < 0:
-                should_add = True
-                pos_num = -num
+        
+        for asteroid in asteroids:
+            destroyed = False
+            # moving left
+            if asteroid < 0:
                 while stack:
-                    # if the stack top is positive
-                    stack_top = stack[-1]
-
-                    if stack_top < 0:
+                    # moving in the same direction
+                    if stack[-1] < 0:
                         break
 
-                    if stack_top > 0:
-                        if pos_num >= stack_top:
-                            stack.pop()
-                        
-                        if pos_num <= stack_top:
-                            should_add = False
-                            break
+                    if stack[-1] > -asteroid:
+                        destroyed = True
+                        break
+                    
+                    if stack[-1] == -asteroid:
+                        stack.pop()
+                        destroyed = True
+                        break
+                    
+                    stack.pop()
 
-                if should_add:
-                    stack.append(num)
-
+            if not destroyed:
+                stack.append(asteroid)
+        
         return stack
