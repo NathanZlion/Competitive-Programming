@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    
+
     def doCount(self, node: Optional[TreeNode]) -> None:
         if not node:
             return
@@ -17,18 +17,13 @@ class Solution:
 
     def findMode(self, root: Optional[TreeNode]) -> List[int]:
         self.count = defaultdict(int)
-        
+
         self.doCount(root)
-        
         max_ = max(self.count.values())
         
         res = []
         for k in self.count.keys():
             if self.count[k] == max_:
                 res.append(k)
-        
-        
-        return res
-                
-        
 
+        return res
