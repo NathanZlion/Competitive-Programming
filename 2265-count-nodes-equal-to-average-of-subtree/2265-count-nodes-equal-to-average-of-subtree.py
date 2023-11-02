@@ -5,29 +5,23 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    
-    def traverse(self, node: Optional[TreeNode]) -> List[int]:
-        
-        # sum, count
-
-        if not node:
-            return [0, 0]
-
-        left_sum, left_count = self.traverse(node.left)
-        right_sum, right_count = self.traverse(node.right)
-        total_count = left_count + right_count + 1
-        total_sum = left_sum + right_sum + node.val
-        average = math.floor(total_sum / total_count)
-
-        if node.val == average:
-            self.count += 1
-
-        return [total_sum, total_count]
-
-    
     def averageOfSubtree(self, root: Optional[TreeNode]) -> int:
-        self.count = 0
-
-        self.traverse(root)
+        def traverse(node: TreeNode) -> Tuple[int, int, int]:
+            """(subtree_sum, subtree_count, res_count)"""
+            # base case
+            if not node:
+                return (0, 0, 0)
+            
+            left_subtree_sum, left_subtree_count, left_res_count = traverse(node.left)
+            right_subtree_sum, right_subtree_count, right_res_count = traverse(node.right)
+            
+            res_count = left_res_count + right_res_count
+            subtree_count = left_subtree_count + right_subtree_count + 1
+            subtree_sum = left_subtree_sum + right_subtree_sum + node.val
+            
+            if subtree_sum // subtree_count == node.val:
+                res_count += 1
+            
+            return (subtree_sum, subtree_count, res_count)
         
-        return self.count
+        return traverse(root)[2]
