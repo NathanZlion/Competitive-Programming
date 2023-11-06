@@ -2,27 +2,28 @@ class Solution:
     def asteroidCollision(self, asteroids: List[int]) -> List[int]:
         stack = []
         
-        for asteroid in asteroids:
+        
+        
+        for rock_size in asteroids:
             destroyed = False
-            # moving left
-            if asteroid < 0:
-                while stack:
-                    # moving in the same direction
-                    if stack[-1] < 0:
-                        break
 
-                    if stack[-1] > -asteroid:
+            if rock_size < 0:
+                while stack and stack[-1] > 0:
+                    opponent = stack[-1]
+
+                    if opponent > -rock_size:
                         destroyed = True
                         break
-                    
-                    if stack[-1] == -asteroid:
+
+                    elif opponent < -rock_size:
+                        stack.pop()
+
+                    else:
                         stack.pop()
                         destroyed = True
                         break
-                    
-                    stack.pop()
 
             if not destroyed:
-                stack.append(asteroid)
-        
+                stack.append(rock_size)
+
         return stack
