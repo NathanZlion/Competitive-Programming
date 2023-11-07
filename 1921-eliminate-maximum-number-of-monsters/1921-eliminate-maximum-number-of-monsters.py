@@ -2,7 +2,7 @@ class Solution:
     def eliminateMaximum(self, dist: List[int], speed: List[int]) -> int:
         num_monsters = len(dist)
         num_monsters_killed = 0
-        reach_time = [dist[i] / speed[i] for i in range(num_monsters)]
+        reach_time = [dist_ / speed_ for dist_, speed_ in zip(dist, speed)]
         heapify(reach_time)
         elapsed_time = 0
         reload_time = 1
