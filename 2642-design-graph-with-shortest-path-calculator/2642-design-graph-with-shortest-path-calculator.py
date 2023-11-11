@@ -17,13 +17,14 @@ class Graph:
 
         while pq:
             curr_cost, curr_node = heappop(pq)
-            if curr_cost > cost_for_node[curr_node]:
-                continue
+
             if curr_node == node2:
                 return curr_cost
+
             for neighbor, cost in self.adj_list[curr_node]:
                 new_cost = curr_cost + cost
                 if new_cost < cost_for_node[neighbor]:
                     cost_for_node[neighbor] = new_cost
                     heappush(pq, (new_cost, neighbor))
+
         return -1
