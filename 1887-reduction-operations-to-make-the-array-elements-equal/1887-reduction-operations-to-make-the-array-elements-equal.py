@@ -2,16 +2,15 @@ class Solution:
     def reductionOperations(self, nums: List[int]) -> int:
 
         nums = Counter(nums)
-        nums = [(-num, count) for num, count in nums.items()]
+        nums = [(num, count) for num, count in nums.items()]
 
-        heapify(nums)
         operations_count = 0
+        val_count = 0
 
-        while nums.__len__() > 1:
-            largest_num, first_count = heappop(nums)
-            next_largest_num, next_count = heappop(nums)
-            
-            operations_count += first_count
-            heappush(nums, (next_largest_num, first_count + next_count))
-        
+        nums.sort()
+        for index in range(len(nums)-1, 0, -1):
+            cur_num, cur_count = nums[index]
+            val_count += cur_count
+            operations_count += val_count
+
         return operations_count
