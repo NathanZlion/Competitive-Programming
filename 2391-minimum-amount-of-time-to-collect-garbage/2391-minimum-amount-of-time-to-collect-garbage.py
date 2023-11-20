@@ -4,7 +4,12 @@ class Solution:
     def garbageCollection(self, garbage: List[str], travel: List[int]) -> int:
         n = len(garbage)
 
-        right_metal_index = right_paper_index = right_glass_index = 0
+        right_most_position = {
+            "M": 0,
+            "G": 0,
+            "P": 0
+        }
+
         metal_count = paper_count = glass_count = 0
         
         for index, garb in enumerate(garbage):
@@ -12,15 +17,10 @@ class Solution:
             glass_count += count["G"]
             paper_count += count["P"]
             metal_count += count["M"]
-            
-            if count["G"]:
-                right_glass_index = index
 
-            if count["P"]:
-                right_paper_index = index
-
-            if count["M"]:
-                right_metal_index = index
+            right_most_position["G"] = index if count["G"] else right_most_position["G"]
+            right_most_position["M"] = index if count["M"] else right_most_position["M"]
+            right_most_position["P"] = index if count["P"] else right_most_position["P"]
 
         # do a prefix sum of the travel time
         for i in range(1, n-1):
@@ -28,8 +28,8 @@ class Solution:
 
         travel.append(0)
 
-        metal_minutes = travel[right_metal_index-1] + metal_count
-        glass_minutes = travel[right_glass_index-1] + glass_count
-        paper_minutes = travel[right_paper_index-1] + paper_count
+        glass_minutes = travel[right_most_position["G"]-1] + glass_count
+        metal_minutes = travel[right_most_position["M"]-1] + metal_count
+        paper_minutes = travel[right_most_position["P"]-1] + paper_count
         
-        return metal_minutes + glass_minutes + paper_minutes
+        return (metal_minutes + glass_minutes + paper_minutes)
