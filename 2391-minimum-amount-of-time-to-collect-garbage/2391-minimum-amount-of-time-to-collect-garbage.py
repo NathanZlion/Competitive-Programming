@@ -21,16 +21,14 @@ class Solution:
 
             if count["M"]:
                 right_metal_index = index
-            
-            del count
 
-        # do a prefix sum of the traverl time
-        travel_cost = [0 for _ in range(n)]
+        # do a prefix sum of the travel time
+        travel_time = [0 for _ in range(n)]
         for i in range(n-1):
-            travel_cost[i+1] += (travel[i] + travel_cost[i])
+            travel_time[i+1] += (travel[i] + travel_time[i])
 
-        metal_minutes = travel_cost[right_metal_index] + metal_count
-        glass_minutes = travel_cost[right_glass_index] + glass_count
-        paper_minutes = travel_cost[right_paper_index] + paper_count
+        metal_minutes = travel_time[right_metal_index] + metal_count
+        glass_minutes = travel_time[right_glass_index] + glass_count
+        paper_minutes = travel_time[right_paper_index] + paper_count
         
         return metal_minutes + glass_minutes + paper_minutes
