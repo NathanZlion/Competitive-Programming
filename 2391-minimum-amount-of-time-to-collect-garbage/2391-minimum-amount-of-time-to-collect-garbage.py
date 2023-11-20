@@ -23,12 +23,13 @@ class Solution:
                 right_metal_index = index
 
         # do a prefix sum of the travel time
-        travel_time = [0 for _ in range(n)]
-        for i in range(n-1):
-            travel_time[i+1] += (travel[i] + travel_time[i])
+        for i in range(1, n-1):
+            travel[i] += travel[i-1]
 
-        metal_minutes = travel_time[right_metal_index] + metal_count
-        glass_minutes = travel_time[right_glass_index] + glass_count
-        paper_minutes = travel_time[right_paper_index] + paper_count
+        travel.append(0)
+
+        metal_minutes = travel[right_metal_index-1] + metal_count
+        glass_minutes = travel[right_glass_index-1] + glass_count
+        paper_minutes = travel[right_paper_index-1] + paper_count
         
         return metal_minutes + glass_minutes + paper_minutes
