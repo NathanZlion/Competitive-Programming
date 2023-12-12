@@ -13,6 +13,6 @@ class Solution:
             needed_remainder = (curr_remainder -k)%k
             subarray_count += remainder_count[needed_remainder]
             remainder_count[curr_remainder] += 1
-            running_sum = running_sum % k
+            running_sum %= k
 
         return subarray_count
