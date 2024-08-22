@@ -6,5 +6,8 @@ class Solution:
         while tempNum:
             sumOfDigits += (tempNum % 10)
             tempNum //= 10
-                
-        return -1 if x % sumOfDigits > 0 else sumOfDigits
+        
+        if x % sumOfDigits > 0:
+            return -1
+
+        return sumOfDigits
