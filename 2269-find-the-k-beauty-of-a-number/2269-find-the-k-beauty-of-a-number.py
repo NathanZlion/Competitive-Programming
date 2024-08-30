@@ -2,7 +2,6 @@ class Solution:
     def divisorSubstrings(self, num: int, k: int) -> int:
         numDigits = ceil(log(num + 1, 10))
         kBeauty = 0
-        print(numDigits)
 
         for i in range(numDigits - k + 1):
             DIVISOR = 10 ** i
