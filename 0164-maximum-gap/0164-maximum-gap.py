@@ -12,10 +12,7 @@ class Solution:
 
         # make range to the nearest power of 10
         _power = round(math.log10(_range))
-        # rangeInNearestPowerOfTen = 10 ** round(math.log10(_range))
         numOfBuckets = 10 ** (_power // 2)
-        print(_range, numOfBuckets)
-        # optimize : consider length of array in this
 
         buckets = [[] for _ in range(numOfBuckets)]
         for num in nums:
