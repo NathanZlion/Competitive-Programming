@@ -6,9 +6,7 @@ class Solution:
         for char in s:
             heappush(heap, (orderDict.get(char, -1), char))
         
-        res = []
-        while heap:
-            _, char = heappop(heap)
-            res.append(char)
+        chars = [(char, orderDict.get(char, -1)) for char in s]
+        chars.sort(key=lambda x: x[1])
         
-        return "".join(res)
+        return "".join([char[0] for char in chars])
