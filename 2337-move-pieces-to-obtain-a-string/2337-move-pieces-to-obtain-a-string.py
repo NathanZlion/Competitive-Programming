@@ -9,24 +9,26 @@ class Solution:
 
             while targetIndex < length and target[targetIndex] == "_":
                  targetIndex += 1
-            
+
             # only one has ended
             if (startIndex == length) ^ (targetIndex == length):
                 return False
-            
+
+            # Both have ended
             if (startIndex == length):
                 break
 
+            # the orders are not right
             if start[startIndex] != target[targetIndex]:
                 return False
-                        
+
             if start[startIndex] == "L" and startIndex < targetIndex:
                 return False
-            
+
             if start[startIndex] == "R" and startIndex > targetIndex:
                 return False
             
             startIndex += 1
             targetIndex += 1
 
-        return startIndex == length ==targetIndex
+        return startIndex == length == targetIndex
