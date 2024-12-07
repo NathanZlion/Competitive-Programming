@@ -1,6 +1,9 @@
 class Solution:
     def minNumOperations(self, nums: List[int], penalty: int) -> int:
-        res = sum([max(0, math.ceil(num / penalty) - 1) for num in nums])
+        res = 0
+        for num in nums:
+            res += max(0, math.ceil(num / penalty) - 1)
+
         return res
 
     def minimumSize(self, nums: List[int], maxOperations: int) -> int:
