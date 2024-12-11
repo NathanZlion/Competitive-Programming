@@ -8,9 +8,12 @@ class Solution:
             # let's try to exclude the current index
             numToExclude = nums[index]
             targetSum = totalSum - numToExclude
-
+            
+            if targetSum % 2:
+                continue
+            
             count[numToExclude] -= 1
-            targetNum = targetSum / 2
+            targetNum = targetSum // 2
             
             # is the rest of the list sum to one of the nums
             # in the list
