@@ -5,11 +5,10 @@ class Solution:
         """
         modified = False
         length = len(nums)
-        maxNumToRight = -1
         
         # try finding the next bigger permutation
-        for index in range(length - 1, -1, -1):
-            if nums[index] >= maxNumToRight:
+        for index in range(length - 2, -1, -1):
+            if nums[index] >= nums[index + 1]:
                 maxNumToRight = nums[index]
                 continue
             
@@ -26,6 +25,7 @@ class Solution:
                 else:
                     right = mid
 
+            # immediate larger element is at index left
             nums[left], nums[index] = nums[index], nums[left]
             
             # make sure the side from index + 1 to end is minimum            
